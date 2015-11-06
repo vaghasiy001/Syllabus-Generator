@@ -1,0 +1,230 @@
+@charset "utf-8";
+/* CSS Document */
+#containermain
+{
+	width:1024px;
+	height:768px;
+	margin:0px auto;
+}
+#header
+{
+	height:auto;
+	width:1024px;
+}
+#wrapper
+{
+	margin-top:-5px;
+	padding-top:5px;	
+	height:550px;
+	background-color:#E8B8AA;
+	width:1024px;
+	overflow:auto;
+}
+#leftwelcotent
+{
+	height:550px;
+	width:600px;
+	float:left;
+}
+#rightwelcontent
+{
+	float:left;
+	height:550px;
+	width:400px;
+}
+.message
+{
+	text-align:center;
+	width:300px;
+	color:#F00;
+	margin:0px auto;	
+}
+#divsuccess
+{
+	width:40%;
+	background-color:#FC9;
+	color:#36F;
+	text-align:center;
+	font-weight:bold;
+margin:0px auto;
+	vertical-align:middle;
+}
+#diverror
+{
+	width:40%;
+	line-height:20px;
+	background-color:#FC9;
+	color:#36F;
+	text-align:center;
+	font-weight:bold;
+	margin-left:300px;
+	margin:0px auto;
+}
+#quotediv
+{
+	float:right;
+	font-size:20px;
+	color:#000;
+	font-weight:900;
+	overflow:hidden;
+	height:300px;
+	width:400px;
+	background-image:url(../images/quotebg.jpg);
+}
+#quotepara
+{
+	padding-top:70px;
+}
+
+#surveycontent
+{
+	overflow:auto;
+	height:550px;
+	width:auto;
+}
+#chgpwdcontent
+{
+		margin-top:53px;
+	height:300px;
+	width:auto;
+
+}
+#chgpwdcontent table
+{	background-color:#9BE3CC;
+	margin:0px auto;
+}
+#viewfaculties table
+{
+	text-transform:capitalize;
+	background-color:#9BE3CC;
+	margin:0px auto;
+	width:85%;
+	height:auto;
+
+}
+#facultycontent
+{
+	margin-top:53px;
+	height:410px;
+	width:auto;
+}
+#facultycontent table
+{
+	background-color:#9BE3CC;
+	margin:0px auto;
+}
+#addobjective
+{
+	margin:0px auto;
+	margin-top:53px;
+	height:300px;
+	width:530px;
+
+}
+#addobjective table
+{
+	background-color:#9BE3CC;
+	margin:0px auto;
+	width:100%;
+
+}
+.inputtext
+{
+	width:90%;
+}
+.namecol
+{
+	width:30%;
+}
+#subjectcontent
+{
+	margin-top:53px;
+	height:300px;
+	width:auto;
+}
+#loginwrapper
+{
+	margin-top:-5px;
+	height:550px;
+	width:1024px;
+	background-color:#aba00a;
+
+}
+#logincontent
+{
+	padding-top:150px;
+	width:300px;
+	height:200px;	
+	margin:0px auto;
+}
+#logincontent table
+{
+	background-color:#9BE3CC;
+
+}
+#subjectcontent table
+{
+	background-color:#9BE3CC;
+	margin:0px auto;
+}
+.subjectobj
+{
+	width:500px;
+	height:auto;
+}
+#profilecontent
+{
+	margin-top:53px;
+	height:300px;
+	width:auto;
+}
+#profilecontent table
+{
+	text-transform:uppercase;
+	background-color:#9BE3CC;
+	margin:0px auto;
+}
+#viewsubjects table
+{
+background-color:#9BE3CC;
+margin:0px auto;
+height:auto;
+width:70%;
+	
+}
+#content
+{
+	height:300px;
+	width:auto;
+}
+#content table
+{
+	background-color:#9BE3CC;
+	margin:0px auto;
+	margin-top:150px;
+}
+.tablecoltitle
+{
+	width:120px;
+}
+#footer
+{
+	margin:-16px auto ;
+	height:50px;
+	padding:0px;
+	background-image:url(../images/footer.png);
+	background-repeat:repeat-x;
+}
+#footer ul li
+{
+	padding-right:10px;
+	list-style-type:none;
+	display:inline;
+}
+#footer ul li a
+{
+	margin:0px;
+	text-align:center;
+	color:#FFF;
+	text-decoration:none;
+}

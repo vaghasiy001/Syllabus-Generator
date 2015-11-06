@@ -1,0 +1,185 @@
+			 <html xmlns:v="urn:schemas-microsoft-com:vml"
+			xmlns:o="urn:schemas-microsoft-com:office:office"
+			xmlns:w="urn:schemas-microsoft-com:office:word"
+			xmlns="http://www.w3.org/TR/REC-html40">
+			
+			<head>
+			<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+			<meta name=ProgId content=Word.Document>
+			<meta name=Generator content="Microsoft Word 9">
+			<meta name=Originator content="Microsoft Word 9">
+			<!--[if !mso]>
+			<style>
+			v\:* {behavior:url(#default#VML);}
+			o\:* {behavior:url(#default#VML);}
+			w\:* {behavior:url(#default#VML);}
+			.shape {behavior:url(#default#VML);}
+			</style>
+			<![endif]-->
+			<title></title>
+			<!--[if gte mso 9]><xml>
+			 <w:WordDocument>
+			  <w:View>Print</w:View>
+			  <w:DoNotHyphenateCaps/>
+			  <w:PunctuationKerning/>
+			  <w:DrawingGridHorizontalSpacing>9.35 pt</w:DrawingGridHorizontalSpacing>
+			  <w:DrawingGridVerticalSpacing>9.35 pt</w:DrawingGridVerticalSpacing>
+			 </w:WordDocument>
+			</xml><![endif]-->
+			<style>
+			<!--
+			 /* Font Definitions */
+			@font-face
+				{font-family:Verdana;
+				panose-1:2 11 6 4 3 5 4 4 2 4;
+				mso-font-charset:0;
+				mso-generic-font-family:swiss;
+				mso-font-pitch:variable;
+				mso-font-signature:536871559 0 0 0 415 0;}
+			 /* Style Definitions */
+			p.MsoNormal, li.MsoNormal, div.MsoNormal
+				{mso-style-parent:"";
+				margin:0in;
+				margin-bottom:.0001pt;
+				mso-pagination:widow-orphan;
+				font-size:7.5pt;
+			        mso-bidi-font-size:8.0pt;
+				font-family:"Verdana";
+				mso-fareast-font-family:"Verdana";}
+			p.small
+				{mso-style-parent:"";
+				margin:0in;
+				margin-bottom:.0001pt;
+				mso-pagination:widow-orphan;
+				font-size:1.0pt;
+			        mso-bidi-font-size:1.0pt;
+				font-family:"Verdana";
+				mso-fareast-font-family:"Verdana";}
+			@page Section1
+				{size:8.5in 11.0in;
+				margin:1.0in 1.25in 1.0in 1.25in;
+				mso-header-margin:.5in;
+				mso-footer-margin:.5in;
+				mso-paper-source:0;}
+			div.Section1
+				{page:Section1;}
+			-->
+			</style>
+			<!--[if gte mso 9]><xml>
+			 <o:shapedefaults v:ext="edit" spidmax="1032">
+			  <o:colormenu v:ext="edit" strokecolor="none"/>
+			 </o:shapedefaults></xml><![endif]--><!--[if gte mso 9]><xml>
+			 <o:shapelayout v:ext="edit">
+			  <o:idmap v:ext="edit" data="1"/>
+			 </o:shapelayout></xml><![endif]-->
+			 
+			</head>
+			<body><table border="1" class="table table-bordered table-hover" style="color:rgb(128,0,0); text-align:center; width:100%">
+	<tbody>
+		<tr>
+			<td colspan="3"><img src="http://localhost/sg2015/faculty/images/ganonlogo.jpg" style="float:left" /></td>
+			<td colspan="3">
+			<h2>Semester: Summer 2015</h2>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">
+			<table align="left" style="color:rgb(128,0,0); text-align:left; width:100%">
+				<tbody>
+					<tr>
+						<td>Name:</td>
+						<td><strong>Jeremy Cannell</strong></td>
+					</tr>
+					<tr>
+						<td>Department:</td>
+						<td><strong>Computer &amp; Information Science</strong></td>
+					</tr>
+					<tr>
+						<td>Email:</td>
+						<td><strong>cannell001@gannon.edu</strong></td>
+					</tr>
+				</tbody>
+			</table>
+			</td>
+			<td colspan="3">
+			<table align="left" style="color:rgb(128,0,0); text-align:left">
+				<tbody>
+					<tr>
+						<td>Office:</td>
+						<td><strong>Z348</strong></td>
+					</tr>
+					<tr>
+						<td>Phone No:</td>
+						<td><strong>111-1234</strong></td>
+					</tr>
+				</tbody>
+			</table>
+			</td>
+		</tr>
+		<tr><!--        <th>COURSE # TITLE</th>-->
+			<th>MONDAY</th>
+			<th>TUESDAY</th>
+			<th>WEDNESDAY</th>
+			<th>THURSDAY</th>
+			<th>FRIDAY</th>
+			<th>SATURDAY</th>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td colspan="6" style="background-color:rgb(128,0,0)">&nbsp;</td>
+		</tr>
+		<tr>
+			<td colspan="2">IF I AM NOT AVAILABLE CONTACT:</td>
+			<td colspan="2">NAME</td>
+			<td>PHONE</td>
+			<td>ROOM</td>
+		</tr>
+		<tr>
+			<td colspan="2">DEAN:</td>
+			<td colspan="2">WILLIAM SCHELLER II, PH.D.</td>
+			<td>871-7582</td>
+			<td>CBI-STE. 200E</td>
+		</tr>
+		<tr>
+			<td colspan="2">PROVOST &amp; VICE PRESIDENT FOR ACADEMIC AFFAIRS:</td>
+			<td colspan="2">CAROLYNN MASTERS, PH.D.</td>
+			<td>871-7341</td>
+			<td>OLD MAIN 205</td>
+		</tr>
+		<tr>
+			<td colspan="6">&copy; 2005 Gannon University</td>
+		</tr>
+	</tbody>
+</table>
+</body></html>

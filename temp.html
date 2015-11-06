@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+<script src="js/jquery-2.1.3.min.js"></script>
+<script>
+$(document).ready(function(e) {
+    $("#btnadd").click(function(){
+		if($("#select1").val()!=null)
+		{
+			var count=$("#select1 :selected").length;
+			if(count==1)
+			{
+				$("#select2").append("<option>"+$("#select1").val()+"</option>");
+				$("#select1 option:selected").remove();
+			}
+			else
+			{
+				var hexvalues = [];
+				var labelvalues = [];
+				
+				$('#select1 :selected').each(function(i, selectedElement) {
+				 hexvalues[i] = $(selectedElement).val();
+				 labelvalues[i] = $(selectedElement).text();
+				$("#select2").append("<option>"+labelvalues[i]+"</option>");
+				$("#select1 option:selected").remove();
+				});
+			}
+		}
+	});
+	$("#btnremove").click(function(){
+		if($("#select2").val()!=null)
+		{	
+			var count=$("#select2 :selected").length;
+			if(count==1)
+			{
+				$("#select1").append("<option>"+$("#select2").val()+"</option>");
+				$("#select2 option:selected").remove();
+			}
+			else
+			{
+				var hexvalues = [];
+				var labelvalues = [];
+				
+				$('#select2 :selected').each(function(i, selectedElement) {
+				 hexvalues[i] = $(selectedElement).val();
+				 labelvalues[i] = $(selectedElement).text();
+				$("#select1").append("<option>"+labelvalues[i]+"</option>");
+				$("#select2 option:selected").remove();
+				});
+			}
+		}
+	});
+});
+</script>
+</head>
+
+<body>
+<select size="10" id="select1" multiple>
+<option>1</option>
+<option>2</option>
+<option>3</option>
+</select>
+<input type="button" id="btnadd" value=">">
+<input type="button" id="btnremove" value="<">
+<select size="10" id="select2" multiple>
+
+</select>
+</body>
+</html>

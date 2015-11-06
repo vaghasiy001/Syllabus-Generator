@@ -1,0 +1,76 @@
+COURSE #,TITLE/START DATE,CAPACITY,# OF STUDENTS,STATUS,INSTRUCTOR,FEE,Min Cred,Max Cred,COREQ CRS,XLIST CRS,Section,Start Time,End Time,Meeting Days,Bldg,Room
+CIS_103_50,First-Year Seminar,16,18,Clsd,Dr B Brinkman,,2,0,,,50,12:20PM,01:15PM,W F,Z,445
+CIS_150_01,Business Technology 1,25,15,Open,Dr T Boulder,10000,3,0,,,1,08:00AM,08:55AM,M W F,Z,335
+CIS_150_02,Business Technology 1,25,25,Clsd,Dr T Boulder,10000,3,0,,,2,09:05AM,10:00AM,M W F,Z,335
+CIS_150_03,Business Technology 1,25,25,Clsd,Dr T Boulder,10000,3,0,,,3,10:10AM,11:05AM,M W F,Z,130
+CIS_150_04,Business Technology 1,23,13,Open,Ms C Gaither,10000,3,0,,,4,08:00AM,09:20AM,T TH,Z,335
+CIS_150_05,Business Technology 1,23,19,Open,Ms C Gaither,10000,3,0,,,5,09:30AM,10:50AM,T TH,Z,335
+CIS_150_1E,Business Technology 1,25,4,Open,Mr M Beiter,10000,3,0,,,1E,06:00PM,07:20PM,T TH,Z,335
+CIS_150_YY,Business Technology 1 08/26 - 12/16,20,0,Open,Ms M Rich,10000,3,0,,,YY,07:30PM,08:50PM,M W,OC,KANE
+CIS_170_01,PC OS/Internet 08/27 - 09/24,25,14,Open,Mr D Marino,3300,1,0,,,1,01:30PM,02:50PM,T TH,Z,130
+CIS_170_02,PC OS/Internet 08/27 - 09/24,25,22,Open,Mr B McIntyre,3300,1,0,,,2,09:30AM,10:50AM,T TH,Z,355
+CIS_170_1E,PC OS/Internet 08/26 - 09/28,25,0,Open,Staff,3300,1,0,,,1E,04:30PM,05:50PM,M W,Z,130
+CIS_171_01,Word Processing 09/29 - 10/29,25,6,Open,Mr D Marino,3300,1,0,,,1,01:30PM,02:50PM,T TH,Z,130
+CIS_171_02,Word Processing 09/29 - 10/29,25,6,Open,Mr B McIntyre,3300,1,0,,,2,09:30AM,10:50AM,T TH,Z,355
+CIS_171_1E,Word Processing 09/30 - 11/02,25,1,Open,Staff,3300,1,0,,,1E,04:30PM,05:50PM,M W,Z,130
+CIS_172_01,Electronic Spreadsht 11/03 - 12/10,25,6,Open,Mr D Marino,3300,1,0,,,1,01:30PM,02:50PM,T TH,Z,130
+CIS_172_02,Electronic Spreadsht 11/03 - 12/10,25,5,Open,Mr B McIntyre,3300,1,0,,,2,09:30AM,10:50AM,T TH,Z,355
+CIS_172_1E,Electronic Spreadsht 11/04 - 12/09,25,4,Open,Staff,3300,1,0,,,1E,04:30PM,05:50PM,M W,Z,130
+CIS_173_01,Database 11/03 - 12/10,25,9,Open,Mr D Marino,3300,1,0,,,1,03:00PM,04:20PM,T TH,PC,2023
+CIS_180_01,Prob Solv & Comp Prog,15,17,Clsd,Mr J Cannell,,2,0,,,1,10:10AM,11:05AM,M W F,Z,336
+CIS_181_01,Prob Solv&ComPg Lab,15,16,Clsd,Mr J Cannell,19400,1,0,,,1,03:00PM,06:00PM,M,Z,336
+CIS_207_01,Intro COBOL Programg,20,1,Open,Mr D Marino,0,3,0,,,1,12:00PM,01:20PM,T TH,Z,101
+CIS_216_01,Prblm-Solv With OOP,20,19,Open,Dr B Brinkman,10500,3,0,,"CIS_216_01,GCIS_505_0A",1,10:10AM,11:05AM,M W F,Z,335
+CIS_217_01,Using UNIX 08/27 - 10/13,20,19,Open,Dr T Vitolo,3300,1,0,,,1,03:35PM,04:30PM,M W,Z,355
+CIS_218_01,UNIX Shell Programming 10/19 - 12/09,20,13,Open,Dr T Vitolo,0,1,0,,,1,03:35PM,04:30PM,M W,Z,355
+CIS_290_1E,Intro to Networks,22,16,Open,Staff,19400,3,0,,,1E,04:30PM,05:50PM,T TH,Z,355
+CIS_296_01,Co-op Educ Seminar,25,0,Open,Ms C Rink,0,1,0,,,1,10:10AM,11:05AM,M W,NL,C
+CIS_305_01,Essentls of Unix Adm 10/21 - 12/12,20,3,Open,Mr J Coffman,3300,1,0,,,1,12:20PM,01:15PM,W F,Z,343
+CIS_317_01,Personal Sftw Proc,20,6,Open,Dr F Xu,19400,3,0,,"CIS_317_01,GCIS_634_0A",1,12:10PM,01:30PM,W F,Z,335
+CIS_326_01,Frml Meth Sftw Dev,20,5,Open,Dr M Tang,,3,0,,,1,09:30AM,10:50AM,T TH,Z,101
+CIS_330_01,Operating Systems,20,14,Open,Dr F Xu,19400,3,0,,,1,03:00PM,04:20PM,M W,Z,235
+CIS_335_01,Sys Analysis Design,20,1,Open,Dr T Vitolo,0,3,0,,"CIS_335_01,GCIS_509_0A",1,11:15AM,12:10PM,M W F,Z,355
+CIS_340_01,Multi-Tiered Systems,20,2,Open,Dr S Sasi,19400,3,0,,,1,01:30PM,02:50PM,T TH,Z,439
+CIS_353_01,Global Project Mgmt,7,3,Open,Staff,240000,4,0,,,1,09:05AM,11:05AM,M W,Z,343
+CIS_355_01,Visual Database Program,20,11,Open,Mr J Cannell,19400,3,0,,,1,03:00PM,04:20PM,T TH,Z,336
+CIS_360_01,Comparative Language,18,10,Open,Dr B Brinkman,19400,3,0,,,1,11:15AM,12:10PM,M W F,Z,336
+CIS_385_1E,Network Dsgn/Mgmt,20,2,Open,Staff,,2,0,,,1E,06:00PM,07:50PM,M,Z,355
+CIS_386_1E,Netwrk Dsgn/Mgmt Lab,20,2,Open,Staff,19400,1,0,,,1E,06:00PM,09:00PM,W,Z,355
+CIS_393_01,Responsive Web Dsgn,20,2,Open,Mr J Cannell,19400,3,0,,"CIS_393_01,GCIS_593_0A",1,01:30PM,02:50PM,W F,Z,336
+CIS_394_01,Admin Internet Serv,20,3,Open,Mr J Coffman,19400,3,0,,"CIS_394_01,GCIS_584_0A",1,03:00PM,04:20PM,T TH,Z,355
+CIS_395_01,Advanced Prog: IOS,3,3,Clsd,Dr S Frezza,19400,3,0,,"CIS_395_01,GCIS_521_0A",1,09:30AM,10:50AM,T TH,Z,336
+CIS_396_01,Cross-Cult Sftw Eng Proj,7,0,Cncl,,19400,4,0,,,1,,,,,
+CIS_400_01,Internship,5,0,Open,Dr M Tang,0,3,0,,,1,,,,BY-,ARR
+CIS_415_01,Sftw Test&Qlty Assur,20,2,Open,Dr F Xu,,3,0,,"CIS_415_01,GCIS_515_0A",1,01:30PM,02:50PM,T TH,Z,229
+CIS_438_01,Hum Intfc Dsgn/Maint,20,1,Open,Dr S Frezza,19400,3,0,,"CIS_438_01,GCIS_639_0A",1,12:00PM,01:20PM,T TH,Z,335
+CIS_457_1E,Senior Design 1,10,11,Clsd,Dr T Vitolo,,3,0,,,1E,04:30PM,05:50PM,M W,Z,229
+GCIS_500_0A,Applied Statistics,30,1,Open,Ms J Revelt,,3,0,,"GCIS_500_0A,MATH_213_02",0A,09:30AM,10:50AM,T TH,Z,130
+GCIS_505_0A,Obj-Ornt Prob Slv C++,20,0,Open,Staff,10500,3,0,,"CIS_216_01,GCIS_505_0A",0A,09:05AM,10:00AM,M W F,Z,336
+GCIS_509_0A,Sys Analysis & Design,20,4,Open,Dr T Vitolo,,3,0,,"CIS_335_01,GCIS_509_0A",0A,11:15AM,12:10PM,M W F,Z,355
+GCIS_514_0A,Rqmts & Project Mgmt,20,7,Open,Dr S Frezza,,3,0,,,0A,03:00PM,04:20PM,M W,Z,439
+GCIS_515_0A,Sftwr Testing & QA,20,0,Open,Dr F Xu,,3,0,,"CIS_415_01,GCIS_515_0A",0A,01:30PM,02:50PM,T TH,Z,TBA
+GCIS_516_0A,Data Centric Cncpt&meth,20,6,Open,Staff,19400,3,0,,,0A,01:30PM,02:50PM,T TH,Z,355
+GCIS_516_0B,Data Centric Cncpt&meth,20,0,Open,Staff,19400,3,0,,,0B,03:00PM,04:20PM,T TH,Z,335
+GCIS_521_0A,Adv Programming: iOS,20,6,Open,Dr S Frezza,19400,3,0,,"CIS_395_01,GCIS_521_0A",0A,09:30AM,10:50AM,T TH,Z,336
+GCIS_523_0A,Statistical Computing,20,13,Open,Dr Y Liu,19400,3,0,,,0A,12:00PM,01:20PM,T TH,Z,355
+GCIS_523_0B,Statistical Computing,20,1,Open,Dr Y Liu,19400,3,0,,,0B,04:30PM,05:50PM,T TH,Z,336
+GCIS_532_0A,Digit Imaging & Appl,20,3,Open,Dr S Sasi,,3,0,,,0A,04:30PM,05:50PM,M W,Z,335
+GCIS_546_0A,Managng Info Orgnztn,25,5,Open,Mr B Scott,,3,0,,,0A,04:30PM,05:50PM,M W,Z,129
+GCIS_555_0A,Dynamic Web Development,20,7,Open,Mr J Cannell,19400,3,0,,,0A,06:00PM,07:20PM,T TH,Z,336
+GCIS_584_0A,Admin of Internet Serv,20,1,Open,Mr J Coffman,,3,0,,"CIS_394_01,GCIS_584_0A",0A,03:00PM,04:20PM,T TH,Z,355
+GCIS_593_0A,Responsive Web Dsgn,20,4,Open,Mr J Cannell,,3,0,,"CIS_393_01,GCIS_593_0A",0A,01:30PM,02:50PM,W F,Z,336
+GCIS_605_0A,Scholarship Seminar,15,7,Open,Dr Y Liu,,3,0,,,0A,06:00PM,07:20PM,M W,Z,439
+GCIS_634_0A,Software Maint & Deplymt,20,13,Open,Dr F Xu,19400,3,0,,"CIS_317_01,GCIS_634_0A",0A,12:10PM,01:30PM,W F,Z,335
+GCIS_639_0A,Interactive Sftwr Devlp,20,11,Open,Dr S Frezza,,3,0,,"CIS_438_01,GCIS_639_0A",0A,12:00PM,01:20PM,T TH,Z,335
+GCIS_646_0A,Archtct Entrp Info Sys,20,10,Open,Dr S Sasi,19400,3,0,,,0A,04:30PM,05:50PM,T TH,Z,335
+GCIS_697_0A,Directed Project,4,3,Open,Dr M Tang,,1,0,,,0A,,,,BY-,ARR
+GCIS_698_0A,Directed Research,4,1,Open,Dr B Brinkman,,3,0,,,0A,01:30PM,04:30PM,F,BY-,ARR
+GCIS_698_0B,Directed Research,4,3,Open,Mr J Cannell,,3,0,,,0B,03:00PM,04:30PM,F,BY-,ARR
+GCIS_698_0C,Directed Research,4,4,Clsd,Dr S Frezza,,3,0,,,0C,01:30PM,04:30PM,F,BY-,ARR
+GCIS_698_0D,Directed Research,4,5,Clsd,Dr Y Liu,,3,0,,,0D,01:30PM,04:30PM,F,BY-,ARR
+GCIS_698_0E,Directed Research,4,1,Open,Dr S Sasi,,3,0,,,0E,01:30PM,04:30PM,F,BY-,ARR
+GCIS_698_0F,Directed Research,4,0,Open,Dr M Tang,,3,0,,,0F,01:30PM,04:30PM,F,BY-,ARR
+GCIS_698_0G,Directed Research,4,1,Open,Dr T Vitolo,,3,0,,,0G,01:30PM,04:30PM,F,BY-,ARR
+GCIS_698_0H,Directed Research,4,3,Open,Dr F Xu,,3,0,,,0H,01:30PM,04:30PM,F,BY-,ARR
+GCIS_698_0I,Directed Research,4,4,Clsd,Mr M Blair,,3,0,,,0I,01:30PM,04:30PM,F,BY-,ARR
+GCIS_799_0A,Thesis,10,3,Open,Dr S Sasi,,3,6,,,0A,,,,BY-,ARR

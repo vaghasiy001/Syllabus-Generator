@@ -1,0 +1,184 @@
+@charset "utf-8";
+/* CSS Document */
+#container
+{
+	margin:0px auto;
+	height:768px;
+	width:1024px;
+}
+#header
+{
+	height:200px;
+	width:1024px;
+}
+.message
+{
+	text-align:center;
+	width:300px;
+	color:#F00;
+	margin:0px auto;	
+}
+
+#wrapper
+{
+	height:570px;
+	width:1024px;
+}
+#loginmain
+{
+	background-image:url(../images/adminPageBackground.jpg);
+	height:570px;
+	width:1024px;
+	background-size:100% 100%;
+
+}
+#logincontent table
+{
+	background-color:#CFC;
+}
+#logincontent
+{
+	padding-top:150px;
+	margin:0px auto;
+	height:200px;
+	width:300px;
+}
+#leftpane
+{
+	height:572px;
+	width:260px;
+	background-color:#FC6;
+	float:left;
+}
+
+#content
+{
+	overflow:auto;
+	float:left;
+	padding-left:4px;
+	width:760px;
+	height:572px;
+	background-image:url(../images/content_background3.gif);
+	background-size:100% 100%;
+}
+#detailscontent
+{
+	margin-top:40px;
+	width:760px;
+	height:auto;
+}
+#info
+{
+	margin-top:-10px;
+	font-size:20px;
+	background-image:url(../images/infobg.jpg);
+	background-size:100% 100%;
+	background-repeat:repeat-x;
+	height:50px;
+	width:100%;
+}
+#detailscontent table
+{
+	width:100%;
+	font-weight:bold;
+	background-image:url(../images/contentbg.png);
+	background-size:100% 100%;
+}
+#contentdetail table
+{
+	padding-top:30px;
+}
+#viewbannercontent table td,th
+{
+	text-align:left;
+}
+
+#viewbannercontent
+{
+	padding-top:40px;
+}
+#viewbannercontent table
+{
+	width:100%;
+}
+
+
+#viewmulticontent
+{
+	padding-top:40px;
+	width:auto;
+	overflow-x:hidden;
+	height:100%;
+}
+
+
+
+#contentdetail table
+{
+		width:100%;
+		height:100%;
+}
+#viewcategoriescontent table td
+{
+	text-align:center;
+}
+#viewcategoriescontent table
+{
+	width:100%;
+}
+
+#footer
+{
+	height:48px;
+	width:1024px;
+}
+.devpr
+{
+	float:right;
+	color:#FFF;
+	font-weight:bold;
+}
+
+#footer
+{
+	margin:-14px auto;
+	height:50px;
+	padding:0px;
+	background-image:url(../images/footer.png);
+	background-repeat:repeat-x;
+}
+#footer ul li
+{
+	padding-right:10px;
+	list-style-type:none;
+	display:inline;
+
+}
+#footer ul li a
+{
+	margin:0px;
+	text-align:center;
+	color:#FFF;
+	text-decoration:none;
+}
+#divsuccess
+{
+	width:40%;
+	background-color:#FC9;
+	color:#36F;
+	text-align:center;
+	font-weight:bold;
+margin:0px auto;
+	vertical-align:middle;
+}
+#diverror
+{
+	width:40%;
+	line-height:20px;
+	background-color:#FC9;
+	color:#36F;
+	text-align:center;
+	font-weight:bold;
+	margin-left:300px;
+	margin:0px auto;
+}
