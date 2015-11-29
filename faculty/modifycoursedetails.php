@@ -12,8 +12,6 @@
 $_POST["ddlcnm"]=$_GET["csid"];	
 }
 ?>
-<?php
-?>
 <?php	if (!logged_in()) {
 		redirect_to("index.php");
 	}
@@ -154,7 +152,7 @@ if($cnt==0)
 }
 else
 {
-	$sql="update facultyhours set starttime='".$st."',endtime='".$en."',cday='".$str."' where csid=".$_POST["ddlcnm"]." and uid=".$_SESSION["userid"]." and csid=".$_SESSION["ddlsem3"];
+	$sql="update facultyhours set starttime='".$st."',endtime='".$en."',cday='".$str."',roomno='".$_POST["txtcloc"]."' where csid=".$_POST["ddlcnm"]." and uid=".$_SESSION["userid"]." and semid=".$_SESSION["ddlsem3"];
 	ExecuteNonQuery($sql);
 }
 $_SESSION["mapcsid"]=$_POST["ddlcnm"];
