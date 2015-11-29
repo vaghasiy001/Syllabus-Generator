@@ -10,12 +10,21 @@
 		require_once("includes/session.php");
 		include("includes/DataAccess.php");  
 ?>
+<<<<<<< HEAD
 <?php 
     if(isset($_GET["csid"]))
     {
     $_POST["ddlcnm"]=$_GET["csid"];	
     }
 	if (!logged_in()) {
+=======
+<?php if(isset($_GET["csid"]))
+{
+$_POST["ddlcnm"]=$_GET["csid"];	
+}
+?>
+<?php	if (!logged_in()) {
+>>>>>>> Soham_Sprint_1
 		redirect_to("index.php");
 	}
 	if(!isset($_SESSION["ddlsem3"]))
@@ -154,7 +163,7 @@ if($cnt==0)
 }
 else
 {
-	$sql="update facultyhours set starttime='".$st."',endtime='".$en."',cday='".$str."' where csid=".$_POST["ddlcnm"]." and uid=".$_SESSION["userid"]." and csid=".$_SESSION["ddlsem3"];
+	$sql="update facultyhours set starttime='".$st."',endtime='".$en."',cday='".$str."',roomno='".$_POST["txtcloc"]."' where csid=".$_POST["ddlcnm"]." and uid=".$_SESSION["userid"]." and semid=".$_SESSION["ddlsem3"];
 	ExecuteNonQuery($sql);
 }
 $_SESSION["mapcsid"]=$_POST["ddlcnm"];
