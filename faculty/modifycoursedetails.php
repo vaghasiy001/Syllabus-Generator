@@ -1,3 +1,6 @@
+<!doctype html>
+<html>
+<head>
 <?php
 	
 	//changed to ta textbox to text area.
@@ -7,16 +10,14 @@
 		require_once("includes/session.php");
 		include("includes/DataAccess.php");  
 ?>
-<?php if(isset($_GET["csid"]))
-{
-$_POST["ddlcnm"]=$_GET["csid"];	
-}
-?>
-<?php	if (!logged_in()) {
+<?php 
+    if(isset($_GET["csid"]))
+    {
+    $_POST["ddlcnm"]=$_GET["csid"];	
+    }
+	if (!logged_in()) {
 		redirect_to("index.php");
 	}
-?>
-<?php
 	if(!isset($_SESSION["ddlsem3"]))
 	{
 		redirect_to("index.php");
@@ -25,7 +26,6 @@ $_POST["ddlcnm"]=$_GET["csid"];
 <?php
 if(isset($_POST["btnsubmit"]))
 {
-	
 		$cno=GetSingleField("select courseno from course_section cs,courses c where c.cid=cs.cid and csid=".$_POST["ddlcnm"],"courseno");
 		if(isset($cno))
 		{
@@ -121,11 +121,9 @@ if(isset($_POST["btnsubmit"]))
 				
 				
 			}
-
 //$tmp=str_replace("'","\'",$_POST["taresources"]);
 //txtwebsite,tabooks,tagp,tacp,taap,taai,tacc
-
-$sql="update section set reqmaterials='".mysqli_real_escape_string($connection,$_POST["tabooks"])."',website='".mysqli_real_escape_string($connection,$_POST["taresources"])."',coursepolicy='".mysqli_real_escape_string($connection,$_POST["tacp"])."',attpolicy='".mysqli_real_escape_string($connection,$_POST["taap"])."',academicintegrity='".mysqli_real_escape_string($connection,$_POST["taai"])."',coursetopics='".mysqli_real_escape_string($connection,$_POST["tacc"])."' where (csid=".$_POST["ddlcnm"]." and uid=".$_SESSION["userid"]." and semid=".$_SESSION["ddlsem3"].")";//"uid,semid=,csid=".mysqli_real_escape_string($connection,$_POST["ddlcnm"]).",.."','".."','".."','".."','".."','".."',".$_SESSION["userid"].",".$_SESSION["ddlsem3"].")"; 
+$sql="update section set reqmaterials='".mysqli_real_escape_string($connection,$_POST["tabooks"])."',website='".mysqli_real_escape_string($connection,$_POST["taresources"])."',coursepolicy='".mysqli_real_escape_string($connection,$_POST["tacp"])."',attpolicy='".mysqli_real_escape_string($connection,$_POST["taap"])."',academicintegrity='".mysqli_real_escape_string($connection,$_POST["taai"])."',coursetopics='".mysqli_real_escape_string($connection,$_POST["tacc"])."' where csid=".$_POST["ddlcnm"]." and uid=".$_SESSION["userid"]." and semid=".$_SESSION["ddlsem3"]." ";//"uid,semid=,csid=".mysqli_real_escape_string($connection,$_POST["ddlcnm"]).",.."','".."','".."','".."','".."','".."',".$_SESSION["userid"].",".$_SESSION["ddlsem3"].")"; 
 //echo $sql;
 ExecuteNonQuery($sql);
 $str="";
@@ -152,11 +150,11 @@ if($cnt==0)
 }
 else
 {
-	$sql="update facultyhours set starttime='".$st."',endtime='".$en."',cday='".$str."',roomno='".$_POST["txtcloc"]."' where csid=".$_POST["ddlcnm"]." and uid=".$_SESSION["userid"]." and semid=".$_SESSION["ddlsem3"];
+	$sql="update facultyhours set starttime='".$st."',endtime='".$en."',cday='".$str."' where csid=".$_POST["ddlcnm"]." and uid=".$_SESSION["userid"]." and csid=".$_SESSION["ddlsem3"];
 	ExecuteNonQuery($sql);
 }
 $_SESSION["mapcsid"]=$_POST["ddlcnm"];
-redirect_to("mapcams.php");
+//redirect_to("mapcams.php");
 }
 ?>
 <?php
@@ -231,9 +229,7 @@ redirect_to("mapcams.php");
 		}
 	}
 ?>
-<!doctype html>
-<html>
-<head>
+
 <meta charset="utf-8">
 <title>Modify Course Details and Mappings</title>
 <link href="css/menu.css" rel="stylesheet" type="text/css">
