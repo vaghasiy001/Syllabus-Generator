@@ -144,7 +144,7 @@ if(isset($_POST["cbx5"]))
 $st=$_POST["ddlsthr"].":".$_POST["ddlstmin"].$_POST["ddlstampm"];
 $en=$_POST["ddlenhr"].":".$_POST["ddlenmin"].$_POST["ddlenampm"];
 $cnt=CountRecords("select * from facultyhours where csid=".$_POST["ddlcnm"]." and uid=".$_SESSION["userid"]." and semid=".$_SESSION["ddlsem3"]);
-
+echo $cnt;
 if($cnt==0)
 {
  $sql="insert into facultyhours(csid,starttime,endtime,type,cday,roomno,uid,semid)values(".$_POST["ddlcnm"].",'".$st."','".$en."','lec','".$str."','".$_POST["txtcloc"];
