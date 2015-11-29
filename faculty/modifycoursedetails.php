@@ -1,3 +1,6 @@
+<!doctype html>
+<html>
+<head>
 <?php
 	
 	//changed to ta textbox to text area.
@@ -7,18 +10,14 @@
 		require_once("includes/session.php");
 		include("includes/DataAccess.php");  
 ?>
-<?php if(isset($_GET["csid"]))
-{
-$_POST["ddlcnm"]=$_GET["csid"];	
-}
-?>
-<?php
-?>
-<?php	if (!logged_in()) {
+<?php 
+    if(isset($_GET["csid"]))
+    {
+    $_POST["ddlcnm"]=$_GET["csid"];	
+    }
+	if (!logged_in()) {
 		redirect_to("index.php");
 	}
-?>
-<?php
 	if(!isset($_SESSION["ddlsem3"]))
 	{
 		redirect_to("index.php");
@@ -27,6 +26,7 @@ $_POST["ddlcnm"]=$_GET["csid"];
 <?php
 if(isset($_POST["btnsubmit"]))
 {
+    echo "submit";
 	
 		$cno=GetSingleField("select courseno from course_section cs,courses c where c.cid=cs.cid and csid=".$_POST["ddlcnm"],"courseno");
 		if(isset($cno))
@@ -123,7 +123,7 @@ if(isset($_POST["btnsubmit"]))
 				
 				
 			}
-
+echo  "<h1>Hello</h1>";
 //$tmp=str_replace("'","\'",$_POST["taresources"]);
 //txtwebsite,tabooks,tagp,tacp,taap,taai,tacc
 
@@ -233,9 +233,7 @@ redirect_to("mapcams.php");
 		}
 	}
 ?>
-<!doctype html>
-<html>
-<head>
+<?php echo $_POST['tacc']; ?>
 <meta charset="utf-8">
 <title>Modify Course Details and Mappings</title>
 <link href="css/menu.css" rel="stylesheet" type="text/css">
