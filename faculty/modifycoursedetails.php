@@ -646,7 +646,11 @@ $(document).ready(function(e) {
             		<td>Resources</td>
             		<td>:</td>
             		<td>
+                            <?php
+				$tares=GetSingleField("select website from section where csid=".$_POST["ddlcnm"]." and uid=".$_SESSION["userid"]." and semid=".$_SESSION["ddlsem3"],"website");
+				?>
                       <textarea name="taresources" rows="10" cols="50" id="taresources">
+                      <?php if(isset($tares) && $tares!="") { echo $tares; } else { ?>
                     	<table border="1" cellpadding="1" cellspacing="1" style="height:29px; width:500px">
                             <tbody>
                                 <tr>
@@ -659,9 +663,7 @@ $(document).ready(function(e) {
                                 </tr>
                             </tbody>
                         </table>
-                        
-                        <p>&nbsp;</p>
-
+                      <?php }?>
                        </textarea>
                         <script>
 							// Replace the <textarea id="editor1"> with a CKEditor
