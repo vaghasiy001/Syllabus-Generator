@@ -80,47 +80,38 @@ if(isset($_POST["btnsubmit"]))
 				}
 			}
 		}
-		for($i=1;$i<=10;$i++)
-			{
-				$tval1="txtcam_".$i."_0";
-				$tval2="tacam_".$i."_0";
-				if(isset($_POST[$tval1]) && trim($_POST[$tval1])!="")
-				{
-					$sql="insert into cams(camname,camdetails,csid,uid,semid)values('".$_POST[$tval1]."','".$_POST[$tval2]."',".$_POST["ddlcnm"].",".$_SESSION["userid"].",".$_SESSION["ddlsem3"].")";
-					ExecuteNonQuery($sql);
-					//echo $sql;
-				}
-				else
-				{
-					$sql="select * from cams where (semid=".$_SESSION["ddlsem3"]." and uid=".$_SESSION["userid"]." and csid=".$_POST["ddlcnm"].")";
-					$cntrec=CountRecords($sql);
-					if($cntrec!="0")
-					{
-						$sql1=ExecuteNonQuery("select * from cams where (semid=".$_SESSION["ddlsem3"]." and uid=".$_SESSION["userid"]." and csid=".$_POST["ddlcnm"].")");
-						while($data4=mysqli_fetch_assoc($sql1))
-						{
-							$tval1="txtcam_".$i."_".$data4["camid"];
-							$tval2="tacam_".$i."_".$data4["camid"];
-							if(isset($_POST[$tval1]) && trim($tval1)!="")
-							{
-									$sql="update cams set camname='".$_POST[$tval1]."',camdetails='".$_POST[$tval2]."' where camid=".$data4["camid"];
-									ExecuteNonQuery($sql);
-								//	echo $sql;
-							}
-							if($tval1=="")
-							{
-									$sql="delete from cams where camid=".$data4["camid"];
-									ExecuteNonQuery($sql);
-								//	echo $sql;
-							}
-	
-						}
-					}
-				}
-			
-				
-				
-			}
+                $savedIds = "";
+		for($i=1;$i<=$_POST["hfcamtot"];$i++)
+                {
+                    $tval1="txtcam_".$i."_0";
+                    $tval2="tacam_".$i."_0";
+                    if(isset($_POST[$tval1]) && trim($_POST[$tval1])!="")
+                    {
+                        $sql="insert into cams(camname,camdetails,csid,uid,semid)values('".$_POST[$tval1]."','".$_POST[$tval2]."',".$_POST["ddlcnm"].",".$_SESSION["userid"].",".$_SESSION["ddlsem3"].")";
+                        $insertedId = ReturnInsertedID($sql);
+                        $savedIds = $savedIds.$insertedId.",";
+                    }
+                    else
+                    {
+                        $hfval = "hfcam_".$i;
+                        if(isset($_POST[$hfval]) && trim($_POST[$hfval])!="")
+                        {
+                            $tval1="txtcam_".$i."_".$_POST[$hfval];
+                            $tval2="tacam_".$i."_".$_POST[$hfval];
+                            if(trim($_POST[$tval1]) != "") {
+                                $sql="update cams set camname='".$_POST[$tval1]."',camdetails='".$_POST[$tval2]."' where camid=".$_POST[$hfval];
+                                ExecuteNonQuery($sql);
+                                $savedIds = $savedIds.$_POST[$hfval].",";
+                            }
+                        }
+                    }	
+                }
+                
+                if($savedIds != "") {
+                    $savedIds = rtrim($savedIds, ',');
+                    $sql="delete from cams where camid not in(".$savedIds.")";
+                    ExecuteNonQuery($sql);
+                }
 
 //$tmp=str_replace("'","\'",$_POST["taresources"]);
 //txtwebsite,tabooks,tagp,tacp,taap,taai,tacc
@@ -291,9 +282,9 @@ $(document).ready(function(e) {
 		}
 		var camtot=document.getElementById("hfcamtot").value;
 		if(camtot==0)
-		{
-			camcnt=0;
-		}
+                    camcnt=0;
+                else
+                    camcnt = camtot;
 	$("#addcamrow").click(function(e){
 		if(camcnt==10)
 		{
@@ -305,6 +296,7 @@ $(document).ready(function(e) {
 			var temp1="txtcam_"+(++camtot)+"_0";
 			var temp2="tacam_"+camtot+"_0";
 			$('#camtable tr:last').after('<tr><td><input type="text" id='+temp1+' name='+temp1+'></td><td><textarea rows=2 cols=40 id='+temp2+' name='+temp2+'></textarea></td></tr>');
+                        $('#hfcamtot').val(camcnt);
 		}
 	});
 	$("#removecamrow").click(function(e){
@@ -313,7 +305,7 @@ $(document).ready(function(e) {
 			$('#camtable tr:last').remove();
 			camcnt--;
 			--camtot;
-		
+                        $('#hfcamtot').val(camcnt);
 			//=camtot;
 	
 		}
@@ -727,12 +719,8 @@ $(document).ready(function(e) {
                             	<td>
                                 <input type="hidden" name="<?php echo "hfcam_$cnt";?>" value="<?php echo $info3["camid"]?>">
                                 <input type="text" name="<?php echo "txtcam_$cnt"."_".$info3["camid"];?>" value="<?php echo $info3["camname"]; ?>"></td>
-                            	<td><textarea rows="2" name="<?php echo "tacam_$cnt"."_".$info3["camid"];; ?>" cols="40"><?php echo $info3["camdetails"];?></textarea>
-                                <input type="hidden" value="<?php if(!isset($_POST["btnsubmit"])) echo $cntrec1;?>" name="hfcamtot" id="hfcamtot">
-                    		 </td>
-                          </tr>
-                             
-								
+                            	<td><textarea rows="2" name="<?php echo "tacam_$cnt"."_".$info3["camid"];; ?>" cols="40"><?php echo $info3["camdetails"];?></textarea></td>
+                          </tr>	
 							<?php	
 								 $cnt++;
 								 }
@@ -740,19 +728,20 @@ $(document).ready(function(e) {
                                 {?>
                                 
                             <tr>
-                            	<td><input type="text"></td>
-                            	<td><input type="text"></td>
+                            	<td><input type="text" name="txtcam_1_0"></td>
+                            	<td><input type="text" name="tacam_1_0"></td>
                             </tr>
                             <tr>
-                            	<td><input type="text"></td>
-                            	<td><input type="text"></td>
+                            	<td><input type="text" name="txtcam_2_0"></td>
+                            	<td><input type="text" name="tacam_2_0"></td>
                             </tr>
                             <tr>
-                            	<td><input type="text"></td>
-                            	<td><input type="text"></td>
+                            	<td><input type="text" name="txtcam_3_0"></td>
+                            	<td><input type="text" name="tacam_3_0"></td>
                            </tr>
                       	 	<?php }?>
                         </table>
+                        <input type="hidden" value="<?php if(!isset($_POST["btnsubmit"])) {echo (($cntrec1 > 0) ? $cntrec1 : 3);} ?>" name="hfcamtot" id="hfcamtot" />
  						<table style="float:left;width:40%">
                         	<tr>
                             	<td rowspan="4" valign="bottom" >

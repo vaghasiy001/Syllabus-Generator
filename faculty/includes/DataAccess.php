@@ -30,6 +30,18 @@ function ExecuteNonQuery($query)
 		$records=mysqli_query($connection,$query);
 		return $records;
 }
+
+function ReturnInsertedID($query)
+{
+    include("connect.php");		
+    if (mysqli_query($connection,$query)) {
+        $last_id = mysqli_insert_id($connection);
+        return $last_id;
+    }
+    else {
+        return 0;
+    }
+}
 function backup_tables($tables = '*')
 {
 	
