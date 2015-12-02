@@ -1,4 +1,4 @@
-DROP TABLE cams;
+DROP TABLE IF EXISTS cams;
 
 CREATE TABLE `cams` (
   `camid` int(11) NOT NULL AUTO_INCREMENT,
@@ -192,7 +192,7 @@ INSERT INTO cams VALUES("518","cam55","cam55 desc","138","2","3");
 
 
 
-DROP TABLE catelog_temp;
+DROP TABLE IF EXISTS catelog_temp;
 
 CREATE TABLE `catelog_temp` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -210,7 +210,7 @@ CREATE TABLE `catelog_temp` (
 
 
 
-DROP TABLE co_req;
+DROP TABLE IF EXISTS co_req;
 
 CREATE TABLE `co_req` (
   `coreqid` int(11) NOT NULL AUTO_INCREMENT,
@@ -230,7 +230,7 @@ INSERT INTO co_req VALUES("11","CIS 315");
 
 
 
-DROP TABLE course_mappings;
+DROP TABLE IF EXISTS course_mappings;
 
 CREATE TABLE `course_mappings` (
   `cocmid` int(11) NOT NULL AUTO_INCREMENT,
@@ -581,7 +581,7 @@ INSERT INTO course_mappings VALUES("3718","ECE_337","4)       Evaluate the const
 
 
 
-DROP TABLE course_section;
+DROP TABLE IF EXISTS course_section;
 
 CREATE TABLE `course_section` (
   `csid` int(11) NOT NULL AUTO_INCREMENT,
@@ -669,7 +669,7 @@ INSERT INTO course_section VALUES("194","GCIS_799_0A","1","142");
 
 
 
-DROP TABLE courses;
+DROP TABLE IF EXISTS courses;
 
 CREATE TABLE `courses` (
   `cid` int(11) NOT NULL AUTO_INCREMENT,
@@ -782,7 +782,7 @@ INSERT INTO courses VALUES("291","GCIS 698","Directed Research","\n				The cour
 
 
 
-DROP TABLE dbbackup;
+DROP TABLE IF EXISTS dbbackup;
 
 CREATE TABLE `dbbackup` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -793,7 +793,7 @@ CREATE TABLE `dbbackup` (
 
 
 
-DROP TABLE dept;
+DROP TABLE IF EXISTS dept;
 
 CREATE TABLE `dept` (
   `deptid` int(11) NOT NULL AUTO_INCREMENT,
@@ -807,7 +807,7 @@ INSERT INTO dept VALUES("1","GCIS","Computer Science","1");
 
 
 
-DROP TABLE dept_outcomes;
+DROP TABLE IF EXISTS dept_outcomes;
 
 CREATE TABLE `dept_outcomes` (
   `docmid` int(11) NOT NULL AUTO_INCREMENT,
@@ -888,7 +888,7 @@ INSERT INTO dept_outcomes VALUES("714","SE3) Apply quanitative measures in the e
 
 
 
-DROP TABLE facultyhours;
+DROP TABLE IF EXISTS facultyhours;
 
 CREATE TABLE `facultyhours` (
   `fhid` int(11) NOT NULL AUTO_INCREMENT,
@@ -966,7 +966,7 @@ INSERT INTO facultyhours VALUES("172","0","11:00AM","12:00AM","office","T F","",
 
 
 
-DROP TABLE fcamm;
+DROP TABLE IF EXISTS fcamm;
 
 CREATE TABLE `fcamm` (
   `fcammid` int(11) NOT NULL AUTO_INCREMENT,
@@ -995,7 +995,7 @@ INSERT INTO fcamm VALUES("5","518","0","0","0","0","0","0","0","0","0","0","3","
 
 
 
-DROP TABLE fclo;
+DROP TABLE IF EXISTS fclo;
 
 CREATE TABLE `fclo` (
   `fcloid` int(11) NOT NULL AUTO_INCREMENT,
@@ -1014,7 +1014,7 @@ INSERT INTO fclo VALUES("3","","3","2","138","dwocm33","pso33");
 
 
 
-DROP TABLE fileinfo;
+DROP TABLE IF EXISTS fileinfo;
 
 CREATE TABLE `fileinfo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1032,7 +1032,7 @@ INSERT INTO fileinfo VALUES("11","matrix updates.csv","V2","1","matrix");
 
 
 
-DROP TABLE gcourse_mappings;
+DROP TABLE IF EXISTS gcourse_mappings;
 
 CREATE TABLE `gcourse_mappings` (
   `cocmid` int(11) NOT NULL AUTO_INCREMENT,
@@ -1261,7 +1261,7 @@ INSERT INTO gcourse_mappings VALUES("3661","GCIS_645","•  Use genetic algorithm 
 
 
 
-DROP TABLE gdept_outcomes;
+DROP TABLE IF EXISTS gdept_outcomes;
 
 CREATE TABLE `gdept_outcomes` (
   `docmid` int(11) NOT NULL AUTO_INCREMENT,
@@ -1340,7 +1340,7 @@ INSERT INTO gdept_outcomes VALUES("744","WD 2:Administer internet services platf
 
 
 
-DROP TABLE gmatrix_courses;
+DROP TABLE IF EXISTS gmatrix_courses;
 
 CREATE TABLE `gmatrix_courses` (
   `macid` int(11) NOT NULL AUTO_INCREMENT,
@@ -1404,7 +1404,7 @@ INSERT INTO gmatrix_courses VALUES("1071","GCIS_645","Intelligent Sys Technologi
 
 
 
-DROP TABLE gmatrix_v1;
+DROP TABLE IF EXISTS gmatrix_v1;
 
 CREATE TABLE `gmatrix_v1` (
   `col0` int(11) DEFAULT NULL,
@@ -1439,7 +1439,7 @@ CREATE TABLE `gmatrix_v1` (
 
 
 
-DROP TABLE gmatrix_v2;
+DROP TABLE IF EXISTS gmatrix_v2;
 
 CREATE TABLE `gmatrix_v2` (
   `col0` int(11) DEFAULT NULL,
@@ -1473,7 +1473,7 @@ CREATE TABLE `gmatrix_v2` (
 
 
 
-DROP TABLE matrix_courses;
+DROP TABLE IF EXISTS matrix_courses;
 
 CREATE TABLE `matrix_courses` (
   `macid` int(11) NOT NULL AUTO_INCREMENT,
@@ -1588,7 +1588,7 @@ INSERT INTO matrix_courses VALUES("1122","ECE_337","Computer Architecture","V2")
 
 
 
-DROP TABLE matrix_v1;
+DROP TABLE IF EXISTS matrix_v1;
 
 CREATE TABLE `matrix_v1` (
   `col0` int(11) DEFAULT NULL,
@@ -1803,7 +1803,7 @@ INSERT INTO matrix_v1 VALUES("0","0","0","0","0","0","0","0","0","1","1","0","0"
 
 
 
-DROP TABLE matrix_v2;
+DROP TABLE IF EXISTS matrix_v2;
 
 CREATE TABLE `matrix_v2` (
   `col0` int(11) DEFAULT NULL,
@@ -2018,7 +2018,7 @@ INSERT INTO matrix_v2 VALUES("0","0","0","0","0","0","0","0","0","1","1","0","0"
 
 
 
-DROP TABLE pre_req;
+DROP TABLE IF EXISTS pre_req;
 
 CREATE TABLE `pre_req` (
   `prereqid` int(11) NOT NULL AUTO_INCREMENT,
@@ -2067,7 +2067,7 @@ INSERT INTO pre_req VALUES("65","CIS 457");
 
 
 
-DROP TABLE section;
+DROP TABLE IF EXISTS section;
 
 CREATE TABLE `section` (
   `sectionid` int(11) NOT NULL AUTO_INCREMENT,
@@ -2148,7 +2148,7 @@ INSERT INTO section VALUES("180","194","Thesis","","","","","","","","7","3","1"
 
 
 
-DROP TABLE semester;
+DROP TABLE IF EXISTS semester;
 
 CREATE TABLE `semester` (
   `semid` int(11) NOT NULL AUTO_INCREMENT,
@@ -2169,7 +2169,7 @@ INSERT INTO semester VALUES("7","Fall","2016","0","7");
 
 
 
-DROP TABLE sub_outcomes;
+DROP TABLE IF EXISTS sub_outcomes;
 
 CREATE TABLE `sub_outcomes` (
   `socmid` int(11) NOT NULL AUTO_INCREMENT,
@@ -2250,7 +2250,7 @@ INSERT INTO sub_outcomes VALUES("646","680","Quantitative Measures","V2");
 
 
 
-DROP TABLE users;
+DROP TABLE IF EXISTS users;
 
 CREATE TABLE `users` (
   `uid` int(11) NOT NULL AUTO_INCREMENT,
