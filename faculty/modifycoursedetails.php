@@ -154,7 +154,7 @@ else
 	ExecuteNonQuery($sql);
 }
 $_SESSION["mapcsid"]=$_POST["ddlcnm"];
-//redirect_to("mapcams.php");
+redirect_to("mapcams.php");
 }
 ?>
 <?php
