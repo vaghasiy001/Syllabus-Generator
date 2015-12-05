@@ -324,17 +324,21 @@ $(document).ready(function(e) {
 //		alert(clotot);
 		if(clocnt==0)
 		{
+                    
 				var temp="txtclo_0_0";
 				$('#clotable').prepend('<tr><td><input type="text" size=70 id='+temp+' name='+temp+'></td></tr>');
 			//	document.getElementById("hfclotot").value=clotot;
 				clocnt++;
+                                
 		}
+                
 		else
 		{
 			if(clocnt==10)
 			{
 				alert("Can not add more than 10 row");
 			}
+                        
 			else
 			{
 				var temp="txtclo_"+(++clotot)+"_0";
@@ -344,14 +348,15 @@ $(document).ready(function(e) {
 			}
 		}
 	});
+        
 	$("#removeclorow").click(function(e){
 		if(clocnt>3)
 		{
-			$("#clotable tr:last").remove();
+ 			$("#clotable tr:last").remove();
 			--clotot;
 			clocnt--;
 			//document.getElementById("hfclotot").value=clotot;
-	
+	       
 		}
 	});
 });
