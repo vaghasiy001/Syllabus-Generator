@@ -350,6 +350,7 @@ $(document).ready(function(e) {
 	});
         
 	$("#removeclorow").click(function(e){
+        
 		if(clocnt>3)
 		{
  			$("#clotable tr:last").remove();
