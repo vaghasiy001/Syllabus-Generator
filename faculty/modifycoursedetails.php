@@ -151,7 +151,9 @@ else
 	ExecuteNonQuery($sql);
 }
 $_SESSION["mapcsid"]=$_POST["ddlcnm"];
-redirect_to("mapcams.php");
+$query_string = array('flag'=>1,
+              'msg'=>'Course details are saved successfully.');
+redirect_to("mapcams.php?".http_build_query($query_string));
 }
 ?>
 <?php
