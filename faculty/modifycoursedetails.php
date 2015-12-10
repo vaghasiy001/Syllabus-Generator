@@ -1,25 +1,23 @@
 <?php
-	
-	//changed to ta textbox to text area.
-		ob_start();
-		ini_set('display_errors','off');
-		require_once("includes/functions.php");
-		require_once("includes/session.php");
-		include("includes/DataAccess.php");  
+    ob_start();
+    ini_set('display_errors','off');
+    require_once("includes/functions.php");
+    require_once("includes/session.php");
+    include("includes/DataAccess.php");  
 ?>
 <?php if(isset($_GET["csid"]))
 {
-$_POST["ddlcnm"]=$_GET["csid"];	
+    $_POST["ddlcnm"]=$_GET["csid"];	
 }
 ?>
 <?php	if (!logged_in()) {
-		redirect_to("index.php");
+            redirect_to("index.php");
 	}
 ?>
 <?php
 	if(!isset($_SESSION["ddlsem3"]))
 	{
-		redirect_to("index.php");
+            redirect_to("index.php");
 	}
 ?>
 <?php
@@ -49,37 +47,43 @@ if(isset($_POST["btnsubmit"]))
 		{
 			$stpoint=1;
 		}
+                $savedId = "";
 		for($i=$stpoint;$i<=10;$i++)
 		{
-			$tval="txtclo_".$i."_0";
-			//echo $tval. "...";
-			if(isset($_POST[$tval]) && trim($_POST[$tval])!="")
-			{
-					$sql="insert into fclo(name,semid,uid,csid)values('".$_POST[$tval]."',".$_SESSION["ddlsem3"].",".$_SESSION["userid"].",".$_POST["ddlcnm"].")";
-					ExecuteNonQuery($sql);
-			//	echo $sql;
-			}
-			else
-			{
-				$sql="select * from fclo where (semid=".$_SESSION["ddlsem3"]." and uid=".$_SESSION["userid"]." and csid=".$_POST["ddlcnm"].")";
-				$cntrec=CountRecords($sql);
-				if($cntrec!="0")
-				{
-					$sql1=ExecuteNonQuery("select * from fclo where (semid=".$_SESSION["ddlsem3"]." and uid=".$_SESSION["userid"]." and csid=".$_POST["ddlcnm"].")");
-					while($data4=mysqli_fetch_assoc($sql1))
-					{
-						$tval1="txtclo_".$i."_".$data4["fcloid"];
-						if(isset($_POST[$tval1]) && trim($tval1)!="")
-						{
-									$sql="update fclo set name='".$_POST[$tval1]."' where fcloid=".$data4["fcloid"];
-									ExecuteNonQuery($sql);
-								//echo $sql;
-						}
-
-					}
-				}
-			}
+                    $tval="txtclo_".$i."_0";
+                    if(isset($_POST[$tval]) && trim($_POST[$tval])!="")
+                    {
+                        $sql="insert into fclo(name,semid,uid,csid)values('".$_POST[$tval]."',".$_SESSION["ddlsem3"].",".$_SESSION["userid"].",".$_POST["ddlcnm"].")";
+                        $insertedId = ReturnInsertedID($sql);
+                        $savedId = $savedId.$insertedId.",";
+                    }
+                    else
+                    {
+                        $sql="select * from fclo where (semid=".$_SESSION["ddlsem3"]." and uid=".$_SESSION["userid"]." and csid=".$_POST["ddlcnm"].")";
+                        $cntrec=CountRecords($sql);
+                        if($cntrec!="0")
+                        {
+                            $sql1=ExecuteNonQuery("select * from fclo where (semid=".$_SESSION["ddlsem3"]." and uid=".$_SESSION["userid"]." and csid=".$_POST["ddlcnm"].")");
+                            while($data4=mysqli_fetch_assoc($sql1))
+                            {
+                                $tval1="txtclo_".$i."_".$data4["fcloid"];
+                                if(isset($_POST[$tval1]) && trim($_POST[$tval1])!="")
+                                {
+                                    $sql="update fclo set name='".$_POST[$tval1]."' where fcloid=".$data4["fcloid"];
+                                    ExecuteNonQuery($sql);
+                                    $savedId = $savedId.$data4["fcloid"].",";
+                                }
+                            }
+                        }
+                    }
 		}
+                
+                if($savedId != "") {
+                    $savedId = rtrim($savedId, ',');
+                    $sql="delete from fclo where fcloid not in(".$savedId.") and semid=".$_SESSION["ddlsem3"]." and uid=".$_SESSION["userid"]." and csid=".$_POST["ddlcnm"];
+                    ExecuteNonQuery($sql);
+                }
+                
                 $savedIds = "";
 		for($i=1;$i<=$_POST["hfcamtot"];$i++)
                 {
@@ -109,7 +113,7 @@ if(isset($_POST["btnsubmit"]))
                 
                 if($savedIds != "") {
                     $savedIds = rtrim($savedIds, ',');
-                    $sql="delete from cams where camid not in(".$savedIds.")";
+                    $sql="delete from cams where camid not in(".$savedIds.") and semid=".$_SESSION["ddlsem3"]." and uid=".$_SESSION["userid"]." and csid=".$_POST["ddlcnm"];
                     ExecuteNonQuery($sql);
                 }
 
@@ -273,77 +277,73 @@ $(document).ready(function(e) {
 		});
 });
 $(document).ready(function(e) {
-    	var camcnt;
-		var  clocnt;
-		var clotot=document.getElementById("hfclotot").value;
-		if(clotot==0)
-		{
-			clocnt=0;
-		}
-		var camtot=document.getElementById("hfcamtot").value;
-		if(camtot==0)
-                    camcnt=0;
-                else
-                    camcnt = camtot;
-	$("#addcamrow").click(function(e){
-		if(camcnt==10)
-		{
-			alert("Can not add more than 10 row");
-		}
-		else
-		{
-			camcnt++;
-			var temp1="txtcam_"+(++camtot)+"_0";
-			var temp2="tacam_"+camtot+"_0";
-			$('#camtable tr:last').after('<tr><td><input type="text" id='+temp1+' name='+temp1+'></td><td><textarea rows=2 cols=40 id='+temp2+' name='+temp2+'></textarea></td></tr>');
-                        $('#hfcamtot').val(camcnt);
-		}
-	});
-	$("#removecamrow").click(function(e){
-		if(camcnt>3)
-		{
-			$('#camtable tr:last').remove();
-			camcnt--;
-			--camtot;
-                        $('#hfcamtot').val(camcnt);
-			//=camtot;
-	
-		}
-	});
-	$("#addclorow").click(function(e){
-//		alert(clotot);
-		if(clocnt==0)
-		{
-				var temp="txtclo_0_0";
-				$('#clotable').prepend('<tr><td><input type="text" size=70 id='+temp+' name='+temp+'></td></tr>');
-			//	document.getElementById("hfclotot").value=clotot;
-				clocnt++;
-		}
-		else
-		{
-			if(clocnt==10)
-			{
-				alert("Can not add more than 10 row");
-			}
-			else
-			{
-				var temp="txtclo_"+(++clotot)+"_0";
-				$('#clotable tr:last').after('<tr><td><input type="text" size=70 id='+temp+' name='+temp+'></td></tr>');
-			//	document.getElementById("hfclotot").value=clotot;
-				clocnt++;
-			}
-		}
-	});
-	$("#removeclorow").click(function(e){
-		if(clocnt>3)
-		{
-			$("#clotable tr:last").remove();
-			--clotot;
-			clocnt--;
-			//document.getElementById("hfclotot").value=clotot;
-	
-		}
-	});
+    var camcnt;
+    var  clocnt;
+    var clotot=document.getElementById("hfclotot").value;
+    if(clotot==0)
+        clocnt=0;
+    else
+        clocnt = clotot;
+    var camtot=document.getElementById("hfcamtot").value;
+    if(camtot==0)
+        camcnt=0;
+    else
+        camcnt = camtot;
+    $("#addcamrow").click(function(e){
+        if(camcnt==10)
+        {
+            alert("Can not add more than 10 row");
+        }
+        else
+        {
+            camcnt++;
+            var temp1="txtcam_"+(++camtot)+"_0";
+            var temp2="tacam_"+camtot+"_0";
+            $('#camtable tr:last').after('<tr><td><input type="text" id='+temp1+' name='+temp1+'></td><td><textarea rows=2 cols=40 id='+temp2+' name='+temp2+'></textarea></td></tr>');
+            $('#hfcamtot').val(camcnt);
+        }
+    });
+    $("#removecamrow").click(function(e){
+        if(camcnt>3)
+        {
+            $('#camtable tr:last').remove();
+            camcnt--;
+            --camtot;
+            $('#hfcamtot').val(camcnt);
+        }
+    });
+    $("#addclorow").click(function(e){
+        if(clocnt==0)
+        {
+            var temp="txtclo_0_0";
+            $('#clotable').prepend('<tr><td><input type="text" size=70 id='+temp+' name='+temp+'></td></tr>');
+            clocnt++;
+        }
+        else
+        {
+            if(clocnt==10)
+            {
+                alert("Can not add more than 10 row");
+            }
+            else
+            {
+                var temp="txtclo_"+(++clotot)+"_0";
+                $('#clotable tr:last').after('<tr><td><input type="text" size=70 id='+temp+' name='+temp+'></td></tr>');
+                clocnt++;
+            }
+        }
+        $("#hfclotot").val(clocnt);
+    });
+
+    $("#removeclorow").click(function(e){
+        if(clocnt>3)
+        {
+            $("#clotable tr:last").remove();
+            --clotot;
+            clocnt--;
+            $("#hfclotot").val(clocnt);
+        }
+    });
 });
 </script>
 </head>
@@ -592,21 +592,20 @@ $(document).ready(function(e) {
 						}
 					}
 					if($cnt2>0)
-						{
-							$data5=ExecuteNonQuery("select * from fclo where semid=".$_SESSION["ddlsem3"]." and uid=".$_SESSION["userid"]." and csid=".$_POST["ddlcnm"]);
-							 while($info5 = mysqli_fetch_assoc($data5)) 
-							 {
-						 	$cnt++;
-						
-							  ?>
-								<tr>
-									<td>
-									<input type="text" value="<?php echo $info5["name"];?>" size="70" id="<?php echo "txtclo_".$cnt."_".$info5["fcloid"];?>" name="<?php echo "txtclo_".$cnt."_".$info5["fcloid"];;?>">
-									</td>
-								</tr>		
-							<?php 
-							}
-						}
+                                        {
+                                            $data5=ExecuteNonQuery("select * from fclo where semid=".$_SESSION["ddlsem3"]." and uid=".$_SESSION["userid"]." and csid=".$_POST["ddlcnm"]);
+                                            while($info5 = mysqli_fetch_assoc($data5)) 
+                                            {
+                                                $cnt++;
+                                              ?>
+                                            <tr>
+                                                <td>
+                                                <input type="text" value="<?php echo $info5["name"];?>" size="70" id="<?php echo "txtclo_".$cnt."_".$info5["fcloid"];?>" name="<?php echo "txtclo_".$cnt."_".$info5["fcloid"];;?>">
+                                                </td>
+                                            </tr>		
+                                        <?php 
+                                            }
+                                        }
 					?>
                     </table>
                     <table align="left" style="width:40%;float:left">
