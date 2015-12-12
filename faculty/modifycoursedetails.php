@@ -4,229 +4,234 @@
     require_once("includes/functions.php");
     require_once("includes/session.php");
     include("includes/DataAccess.php");  
-?>
-<?php if(isset($_GET["csid"]))
-{
-    $_POST["ddlcnm"]=$_GET["csid"];	
-}
-?>
-<?php	if (!logged_in()) {
-            redirect_to("index.php");
-	}
-?>
-<?php
-	if(!isset($_SESSION["ddlsem3"]))
-	{
-            redirect_to("index.php");
-	}
-?>
-<?php
-if(isset($_POST["btnsubmit"]))
-{
+    
+    if(isset($_GET["csid"]))
+    {
+        $_POST["ddlcnm"]=$_GET["csid"];	
+    }
 	
-		$cno=GetSingleField("select courseno from course_section cs,courses c where c.cid=cs.cid and csid=".$_POST["ddlcnm"],"courseno");
-		if(isset($cno))
-		{
-			$myc=substr($cno,0,1);
-			if($myc=="C")
-			{
-				$ver=GetSingleField("select version from fileinfo where active=1 and ftype='matrix'","version");
-				$stpoint=CountRecords("select cno from course_mappings where cno='".str_replace(" ","_",$cno)."' and version='".$ver."'");
-				if($stpoint!=0)
-					$stpoint++;
-			}
-			else
-			{
-				$ver=GetSingleField("select version from fileinfo where active=1 and ftype='hmatrix'","version");
-				$stpoint=CountRecords("select cno from gcourse_mappings where cno='".str_replace(" ","_",$cno)."' and version='".$ver."'");
-				if($stpoint!=0)
-					$stpoint++;
-			}
-		}
-		else
-		{
-			$stpoint=1;
-		}
-                $savedId = "";
-		for($i=$stpoint;$i<=10;$i++)
-		{
-                    $tval="txtclo_".$i."_0";
-                    if(isset($_POST[$tval]) && trim($_POST[$tval])!="")
-                    {
-                        $sql="insert into fclo(name,semid,uid,csid)values('".$_POST[$tval]."',".$_SESSION["ddlsem3"].",".$_SESSION["userid"].",".$_POST["ddlcnm"].")";
-                        $insertedId = ReturnInsertedID($sql);
-                        $savedId = $savedId.$insertedId.",";
-                    }
-                    else
-                    {
-                        $sql="select * from fclo where (semid=".$_SESSION["ddlsem3"]." and uid=".$_SESSION["userid"]." and csid=".$_POST["ddlcnm"].")";
-                        $cntrec=CountRecords($sql);
-                        if($cntrec!="0")
-                        {
-                            $sql1=ExecuteNonQuery("select * from fclo where (semid=".$_SESSION["ddlsem3"]." and uid=".$_SESSION["userid"]." and csid=".$_POST["ddlcnm"].")");
-                            while($data4=mysqli_fetch_assoc($sql1))
-                            {
-                                $tval1="txtclo_".$i."_".$data4["fcloid"];
-                                if(isset($_POST[$tval1]) && trim($_POST[$tval1])!="")
-                                {
-                                    $sql="update fclo set name='".$_POST[$tval1]."' where fcloid=".$data4["fcloid"];
-                                    ExecuteNonQuery($sql);
-                                    $savedId = $savedId.$data4["fcloid"].",";
-                                }
-                            }
-                        }
-                    }
-		}
-                
-                if($savedId != "") {
-                    $savedId = rtrim($savedId, ',');
-                    $sql="delete from fclo where fcloid not in(".$savedId.") and semid=".$_SESSION["ddlsem3"]." and uid=".$_SESSION["userid"]." and csid=".$_POST["ddlcnm"];
-                    ExecuteNonQuery($sql);
-                }
-                
-                $savedIds = "";
-		for($i=1;$i<=$_POST["hfcamtot"];$i++)
+    if (!logged_in()) {
+        redirect_to("index.php");
+    }
+
+    if(!isset($_SESSION["ddlsem3"]))
+    {
+        redirect_to("index.php");
+    }
+
+    if(isset($_POST["btnsubmit"]))
+    {
+        $cno="";
+        $cid = "";
+        $special="";
+        $sql = "SELECT c.courseno, c.special, c.cid FROM course_section cs,courses c WHERE c.cid=cs.cid AND cs.csid=".$_POST["ddlcnm"];
+        $data=ExecuteNonQuery($sql);
+        while($info = mysqli_fetch_assoc($data)) 
+        {
+            $cno = $info["courseno"];
+            $cid = $info["cid"];
+            $special = $info["special"];
+        }
+        //$cno=GetSingleField("select courseno from course_section cs,courses c where c.cid=cs.cid and csid=".$_POST["ddlcnm"],"courseno");
+        if(isset($cno))
+        {
+            $myc=substr($cno,0,1);
+            if($myc=="C")
+            {
+                $ver=GetSingleField("select version from fileinfo where active=1 and ftype='matrix'","version");
+                $stpoint=CountRecords("select cno from course_mappings where cno='".str_replace(" ","_",$cno)."' and version='".$ver."'");
+                if($stpoint!=0)
+                    $stpoint++;
+            }
+            else
+            {
+                $ver=GetSingleField("select version from fileinfo where active=1 and ftype='hmatrix'","version");
+                $stpoint=CountRecords("select cno from gcourse_mappings where cno='".str_replace(" ","_",$cno)."' and version='".$ver."'");
+                if($stpoint!=0)
+                    $stpoint++;
+            }
+        }
+        else
+        {
+            $stpoint=1;
+        }
+        
+        if($special == true){
+            $sql = "update courses set description='".mysqli_real_escape_string($connection,$_POST["tacdetails"])."' where cid=".$cid;
+            ExecuteNonQuery($sql);
+        }
+        
+        $savedId = "";
+        for($i=$stpoint;$i<=10;$i++)
+        {
+            $tval="txtclo_".$i."_0";
+            if(isset($_POST[$tval]) && trim($_POST[$tval])!="")
+            {
+                $sql="insert into fclo(name,semid,uid,csid)values('".$_POST[$tval]."',".$_SESSION["ddlsem3"].",".$_SESSION["userid"].",".$_POST["ddlcnm"].")";
+                $insertedId = ReturnInsertedID($sql);
+                $savedId = $savedId.$insertedId.",";
+            }
+            else
+            {
+                $sql="select * from fclo where (semid=".$_SESSION["ddlsem3"]." and uid=".$_SESSION["userid"]." and csid=".$_POST["ddlcnm"].")";
+                $cntrec=CountRecords($sql);
+                if($cntrec!="0")
                 {
-                    $tval1="txtcam_".$i."_0";
-                    $tval2="tacam_".$i."_0";
-                    if(isset($_POST[$tval1]) && trim($_POST[$tval1])!="")
+                    $sql1=ExecuteNonQuery("select * from fclo where (semid=".$_SESSION["ddlsem3"]." and uid=".$_SESSION["userid"]." and csid=".$_POST["ddlcnm"].")");
+                    while($data4=mysqli_fetch_assoc($sql1))
                     {
-                        $sql="insert into cams(camname,camdetails,csid,uid,semid)values('".$_POST[$tval1]."','".$_POST[$tval2]."',".$_POST["ddlcnm"].",".$_SESSION["userid"].",".$_SESSION["ddlsem3"].")";
-                        $insertedId = ReturnInsertedID($sql);
-                        $savedIds = $savedIds.$insertedId.",";
-                    }
-                    else
-                    {
-                        $hfval = "hfcam_".$i;
-                        if(isset($_POST[$hfval]) && trim($_POST[$hfval])!="")
+                        $tval1="txtclo_".$i."_".$data4["fcloid"];
+                        if(isset($_POST[$tval1]) && trim($_POST[$tval1])!="")
                         {
-                            $tval1="txtcam_".$i."_".$_POST[$hfval];
-                            $tval2="tacam_".$i."_".$_POST[$hfval];
-                            if(trim($_POST[$tval1]) != "") {
-                                $sql="update cams set camname='".$_POST[$tval1]."',camdetails='".$_POST[$tval2]."' where camid=".$_POST[$hfval];
-                                ExecuteNonQuery($sql);
-                                $savedIds = $savedIds.$_POST[$hfval].",";
-                            }
+                            $sql="update fclo set name='".$_POST[$tval1]."' where fcloid=".$data4["fcloid"];
+                            ExecuteNonQuery($sql);
+                            $savedId = $savedId.$data4["fcloid"].",";
                         }
-                    }	
+                    }
                 }
-                
-                if($savedIds != "") {
-                    $savedIds = rtrim($savedIds, ',');
-                    $sql="delete from cams where camid not in(".$savedIds.") and semid=".$_SESSION["ddlsem3"]." and uid=".$_SESSION["userid"]." and csid=".$_POST["ddlcnm"];
-                    ExecuteNonQuery($sql);
+            }
+        }
+
+        if($savedId != "") {
+            $savedId = rtrim($savedId, ',');
+            $sql="delete from fclo where fcloid not in(".$savedId.") and semid=".$_SESSION["ddlsem3"]." and uid=".$_SESSION["userid"]." and csid=".$_POST["ddlcnm"];
+            ExecuteNonQuery($sql);
+        }
+
+        $savedIds = "";
+        for($i=1;$i<=$_POST["hfcamtot"];$i++)
+        {
+            $tval1="txtcam_".$i."_0";
+            $tval2="tacam_".$i."_0";
+            if(isset($_POST[$tval1]) && trim($_POST[$tval1])!="")
+            {
+                $sql="insert into cams(camname,camdetails,csid,uid,semid)values('".$_POST[$tval1]."','".$_POST[$tval2]."',".$_POST["ddlcnm"].",".$_SESSION["userid"].",".$_SESSION["ddlsem3"].")";
+                $insertedId = ReturnInsertedID($sql);
+                $savedIds = $savedIds.$insertedId.",";
+            }
+            else
+            {
+                $hfval = "hfcam_".$i;
+                if(isset($_POST[$hfval]) && trim($_POST[$hfval])!="")
+                {
+                    $tval1="txtcam_".$i."_".$_POST[$hfval];
+                    $tval2="tacam_".$i."_".$_POST[$hfval];
+                    if(trim($_POST[$tval1]) != "") {
+                        $sql="update cams set camname='".$_POST[$tval1]."',camdetails='".$_POST[$tval2]."' where camid=".$_POST[$hfval];
+                        ExecuteNonQuery($sql);
+                        $savedIds = $savedIds.$_POST[$hfval].",";
+                    }
                 }
+            }	
+        }
 
-//$tmp=str_replace("'","\'",$_POST["taresources"]);
-//txtwebsite,tabooks,tagp,tacp,taap,taai,tacc
+        if($savedIds != "") {
+            $savedIds = rtrim($savedIds, ',');
+            $sql="delete from cams where camid not in(".$savedIds.") and semid=".$_SESSION["ddlsem3"]." and uid=".$_SESSION["userid"]." and csid=".$_POST["ddlcnm"];
+            ExecuteNonQuery($sql);
+        }
 
-$sql="update section set reqmaterials='".mysqli_real_escape_string($connection,$_POST["tabooks"])."',website='".mysqli_real_escape_string($connection,$_POST["taresources"])."',coursepolicy='".mysqli_real_escape_string($connection,$_POST["tacp"])."',attpolicy='".mysqli_real_escape_string($connection,$_POST["taap"])."',academicintegrity='".mysqli_real_escape_string($connection,$_POST["taai"])."',coursetopics='".mysqli_real_escape_string($connection,$_POST["tacc"])."' where (csid=".$_POST["ddlcnm"]." and uid=".$_SESSION["userid"]." and semid=".$_SESSION["ddlsem3"].")";//"uid,semid=,csid=".mysqli_real_escape_string($connection,$_POST["ddlcnm"]).",.."','".."','".."','".."','".."','".."',".$_SESSION["userid"].",".$_SESSION["ddlsem3"].")"; 
-//echo $sql;
-ExecuteNonQuery($sql);
-$str="";
-if(isset($_POST["cbx1"]))
-	$str.="M";
-if(isset($_POST["cbx2"]))
-	$str.=" T";
-if(isset($_POST["cbx3"]))
-	$str.=" W";
-if(isset($_POST["cbx4"]))
-	$str.=" Th";
-if(isset($_POST["cbx5"]))
-	$str.=" F";
-$st=$_POST["ddlsthr"].":".$_POST["ddlstmin"].$_POST["ddlstampm"];
-$en=$_POST["ddlenhr"].":".$_POST["ddlenmin"].$_POST["ddlenampm"];
-$cnt=CountRecords("select * from facultyhours where csid=".$_POST["ddlcnm"]." and uid=".$_SESSION["userid"]." and semid=".$_SESSION["ddlsem3"]);
+        $sql="update section set reqmaterials='".mysqli_real_escape_string($connection,$_POST["tabooks"])."',website='".mysqli_real_escape_string($connection,$_POST["taresources"])."',coursepolicy='".mysqli_real_escape_string($connection,$_POST["tacp"])."',attpolicy='".mysqli_real_escape_string($connection,$_POST["taap"])."',academicintegrity='".mysqli_real_escape_string($connection,$_POST["taai"])."',coursetopics='".mysqli_real_escape_string($connection,$_POST["tacc"])."' where (csid=".$_POST["ddlcnm"]." and uid=".$_SESSION["userid"]." and semid=".$_SESSION["ddlsem3"].")";
+        ExecuteNonQuery($sql);
+        $str="";
+        if(isset($_POST["cbx1"]))
+                $str.="M";
+        if(isset($_POST["cbx2"]))
+                $str.=" T";
+        if(isset($_POST["cbx3"]))
+                $str.=" W";
+        if(isset($_POST["cbx4"]))
+                $str.=" Th";
+        if(isset($_POST["cbx5"]))
+                $str.=" F";
+        $st=$_POST["ddlsthr"].":".$_POST["ddlstmin"].$_POST["ddlstampm"];
+        $en=$_POST["ddlenhr"].":".$_POST["ddlenmin"].$_POST["ddlenampm"];
+        $cnt=CountRecords("select * from facultyhours where csid=".$_POST["ddlcnm"]." and uid=".$_SESSION["userid"]." and semid=".$_SESSION["ddlsem3"]);
 
-if($cnt==0)
-{
- $sql="insert into facultyhours(csid,starttime,endtime,type,cday,roomno,uid,semid)values(".$_POST["ddlcnm"].",'".$st."','".$en."','lec','".$str."','".$_POST["txtcloc"];
-  $sql.="',".$_SESSION["userid"].",".$_SESSION["ddlsem3"].")";
-//  echo $sql;
-	ExecuteNonQuery($sql);
-}
-else
-{
-	$sql="update facultyhours set starttime='".$st."',endtime='".$en."',cday='".$str."',roomno='".$_POST["txtcloc"]."' where csid=".$_POST["ddlcnm"]." and uid=".$_SESSION["userid"]." and semid=".$_SESSION["ddlsem3"];
-	ExecuteNonQuery($sql);
-}
-$_SESSION["mapcsid"]=$_POST["ddlcnm"];
-$query_string = array('flag'=>1,
-              'msg'=>'Course details are saved successfully.');
-redirect_to("mapcams.php?".http_build_query($query_string));
-}
-?>
-<?php
-	if(isset($_POST["ddlcnm"]))
-	{
-		$cno=GetSingleField("select cid from course_section where csid=".$_POST["ddlcnm"],"cid");
-		$sql="select c.courseno,c.coursename,c.credits,c.prereqid,c.coreqid,c.description from courses c,course_section cs where c.cid=cs.cid and c.cid=".$cno;
-//		echo $sql;
-		$data=ExecuteNonQuery($sql);
-		$cnm="";
-		$desc="";
-		$credits="";
-		$prereq="";
-		$coreq="";
-		$sem="";
-		$cno="";
-		$classloc="";
-		$cday="";
-		$sttimehr="";
-		$sttimemin="";
-		$sttimeampm="";
-		$entimehr="";
-		$entimemin="";
-		$entimeampm="";
-		if(mysqli_num_rows($data)>0)
-		{
-			while($info = mysqli_fetch_assoc($data)) 
-			{
-				$cnm=$info["coursename"];
-				$desc=$info["description"];
-				$credits=$info["credits"];
-				if($info["prereqid"]=="0")
-					$prereq="None";
-				else
-					$prereq=GetSingleField("select pcname from pre_req where prereqid=".$info["prereqid"],"pcname");
-				if($info["coreqid"]=="0")
-					$coreq="None";
-				else
-					$coreq=GetSingleField("select ccname from co_req where coreqid=".$info["coreqid"],"ccname");
-				$cno=$info["courseno"];
-				
-				$sql="select starttime,endtime,cday,roomno from facultyhours where csid=".$_POST["ddlcnm"]." and semid=".$_SESSION["ddlsem3"]." and uid=".$_SESSION["userid"];
-//				echo $sql;
-				$dt2=ExecuteNonQuery($sql);
-				
-				while($inf2 = mysqli_fetch_assoc($dt2)) 
-				{
-					$classloc=$inf2["roomno"];
-					$cday=explode(" ",$inf2["cday"]);
-					$tmp=explode(":",$inf2["starttime"]);
-					$sttimehr=$tmp[0];
-					$sttimemin=substr($tmp[1],0,2);
-					$sttimeampm=substr($tmp[1],-2);
-					$tmp1=explode(":",$inf2["endtime"]);
-					$entimehr=$tmp1[0];
-					$entimemin=substr($tmp1[1],0,2);
-					$entimeampm=substr($tmp1[1],-2);
-					
-				}	
-					
-				//$sem=GetSingleField("select sem
-			}
-			if(isset($_SESSION["ddlsem3"]))
-			{
-				$sql="select semname,year from semester where semid=".$_SESSION["ddlsem3"];
-				$data2=ExecuteNonQuery($sql);
-				while($info = mysqli_fetch_assoc($data2)) 
-				{
-					$sem=$info["semname"]." ".$info["year"];
-				}
-			}
-		}
-	}
+        if($cnt==0)
+        {
+            $sql="insert into facultyhours(csid,starttime,endtime,type,cday,roomno,uid,semid)values(".$_POST["ddlcnm"].",'".$st."','".$en."','lec','".$str."','".$_POST["txtcloc"];
+            $sql.="',".$_SESSION["userid"].",".$_SESSION["ddlsem3"].")";
+            ExecuteNonQuery($sql);
+        }
+        else
+        {
+            $sql="update facultyhours set starttime='".$st."',endtime='".$en."',cday='".$str."',roomno='".$_POST["txtcloc"]."' where csid=".$_POST["ddlcnm"]." and uid=".$_SESSION["userid"]." and semid=".$_SESSION["ddlsem3"];
+            ExecuteNonQuery($sql);
+        }
+        $_SESSION["mapcsid"]=$_POST["ddlcnm"];
+        $query_string = array('flag'=>1,
+                              'msg'=>'Course details are saved successfully.');
+        redirect_to("mapcams.php?".http_build_query($query_string));
+    }
+
+    if(isset($_POST["ddlcnm"]))
+    {
+        $cno=GetSingleField("select cid from course_section where csid=".$_POST["ddlcnm"],"cid");
+        $sql="select c.courseno,c.coursename,c.special,c.credits,c.prereqid,c.coreqid,c.description from courses c,course_section cs where c.cid=cs.cid and c.cid=".$cno;
+        $data=ExecuteNonQuery($sql);
+        $cnm="";
+        $special="";
+        $desc="";
+        $credits="";
+        $prereq="";
+        $coreq="";
+        $sem="";
+        $cno="";
+        $classloc="";
+        $cday="";
+        $sttimehr="";
+        $sttimemin="";
+        $sttimeampm="";
+        $entimehr="";
+        $entimemin="";
+        $entimeampm="";
+        if(mysqli_num_rows($data)>0)
+        {
+            while($info = mysqli_fetch_assoc($data)) 
+            {
+                $cnm=$info["coursename"];
+                $desc=$info["description"];
+                $special = $info["special"];
+                $credits=$info["credits"];
+                if($info["prereqid"]=="0")
+                    $prereq="None";
+                else
+                    $prereq=GetSingleField("select pcname from pre_req where prereqid=".$info["prereqid"],"pcname");
+                if($info["coreqid"]=="0")
+                    $coreq="None";
+                else
+                    $coreq=GetSingleField("select ccname from co_req where coreqid=".$info["coreqid"],"ccname");
+                $cno=$info["courseno"];
+
+                $sql="select starttime,endtime,cday,roomno from facultyhours where csid=".$_POST["ddlcnm"]." and semid=".$_SESSION["ddlsem3"]." and uid=".$_SESSION["userid"];
+                $dt2=ExecuteNonQuery($sql);
+
+                while($inf2 = mysqli_fetch_assoc($dt2)) 
+                {
+                    $classloc=$inf2["roomno"];
+                    $cday=explode(" ",$inf2["cday"]);
+                    $tmp=explode(":",$inf2["starttime"]);
+                    $sttimehr=$tmp[0];
+                    $sttimemin=substr($tmp[1],0,2);
+                    $sttimeampm=substr($tmp[1],-2);
+                    $tmp1=explode(":",$inf2["endtime"]);
+                    $entimehr=$tmp1[0];
+                    $entimemin=substr($tmp1[1],0,2);
+                    $entimeampm=substr($tmp1[1],-2);
+                }
+            }
+            if(isset($_SESSION["ddlsem3"]))
+            {
+                $sql="select semname,year from semester where semid=".$_SESSION["ddlsem3"];
+                $data2=ExecuteNonQuery($sql);
+                while($info = mysqli_fetch_assoc($data2)) 
+                {
+                    $sem=$info["semname"]." ".$info["year"];
+                }
+            }
+        }
+    }
 ?>
 <!doctype html>
 <html>
@@ -235,48 +240,44 @@ redirect_to("mapcams.php?".http_build_query($query_string));
 <title>Modify Course Details and Mappings</title>
 <link href="css/menu.css" rel="stylesheet" type="text/css">
 <script src="js/jquery-latest.min.js"></script>
-        <script src="ckeditor/ckeditor.js"></script>
+<script src="ckeditor/ckeditor.js"></script>
 
 <link href="css/style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
 $(document).ready(function(e) {
-    	$("#btnsubmit").click(function(e){
-				var taresources=document.getElementById("taresources").value;
-				var tagp=document.getElementById("tagp").value;
-				var tacp=document.getElementById("tacp").value;
-				var taap=document.getElementById("taap").value;
-				var taai=document.getElementById("taai").value;
-				var tacc=document.getElementById("tacc").value;
-			//	alert(website);
-				if(taresources=="")
-				{
-					alert("Please enter course resources");
-					return false;
-				}
-				if(tacp=="")
-				{
-					alert("Please enter course policies");
-					return false;
-				}
-				if(taap=="")
-				{
-					alert("Please enter attendance policies");
-					return false;
-				}
-				if(taai=="")
-				{
-					alert("Please enter academic integrity");
-					return false;
-				}
-				if(tacc=="")
-				{
-					alert("Please enter course calendar with topics");
-					return false;
-				}
-				
-				
-				
-		});
+    $("#btnsubmit").click(function(e){
+        var taresources=document.getElementById("taresources").value;
+        var tagp=document.getElementById("tagp").value;
+        var tacp=document.getElementById("tacp").value;
+        var taap=document.getElementById("taap").value;
+        var taai=document.getElementById("taai").value;
+        var tacc=document.getElementById("tacc").value;
+        if(taresources=="")
+        {
+            alert("Please enter course resources");
+            return false;
+        }
+        if(tacp=="")
+        {
+            alert("Please enter course policies");
+            return false;
+        }
+        if(taap=="")
+        {
+            alert("Please enter attendance policies");
+            return false;
+        }
+        if(taai=="")
+        {
+            alert("Please enter academic integrity");
+            return false;
+        }
+        if(tacc=="")
+        {
+            alert("Please enter course calendar with topics");
+            return false;
+        }	
+    });
 });
 $(document).ready(function(e) {
     var camcnt;
@@ -504,13 +505,14 @@ $(document).ready(function(e) {
             		<td>Course Description</td>
                     <td>:</td>
             		<td>
-                                       <textarea name="tacdetails" rows="10" cols="50" disabled><?php
-									   if(isset($desc) && $desc!="")
-									   {
-										   echo $desc;
-									   }
-									   ?>
-                                  </textarea>
+						   <textarea name="tacdetails" rows="10" cols="50" <?php if($special==false){ echo "disabled";} ?>>
+                               <?php
+                                    if(isset($desc) && $desc!="")
+                                    {
+										echo $desc;
+                                    }
+                                ?>
+							</textarea>
                                     <script>
 							// Replace the <textarea id="editor1"> with a CKEditor
 							// instance, using default configuration.

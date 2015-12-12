@@ -13,6 +13,7 @@ require_once("includes/session.php");
 <?php
 if(isset($_POST["Submit"]))
 {
+	if(isset($_POST['spCourse'])){  $spActive = $_POST['spCourse'];}
 	$i=0;
 	if(isset($_POST["cbxactive"]))
 		$i=1;
@@ -59,8 +60,8 @@ if(isset($_POST["Submit"]))
 	}
 	$credits=$_POST["txtcredits"];
 //	$cdet=str_replace("'","\'",$cdet);
-	$sql="insert into courses(courseno,coursename,description,prereqid,coreqid,credits,active,deptid)values(";
-	$sql.="'".strtoupper($cid)."','".$cnm."','$cdet',$prereq,$coreq,$credits,$i,1)";
+	$sql="insert into courses(courseno,coursename,special,description,prereqid,coreqid,credits,active,deptid)values(";
+	$sql.="'".strtoupper($cid)."','".$cnm."',$spActive,'$cdet',$prereq,$coreq,$credits,$i,1)";
 //	echo $sql;
 	ExecuteNonQuery($sql);
 	redirect_to("viewcourses.php");
@@ -147,6 +148,9 @@ if(isset($_POST["Submit"]))
                 	<td>Course Name</td>
 					<td>:</td>
                     <td><input type="text" name="txtcnm" size="100"></td>
+                </tr>
+                <tr>
+					<td colspan="3">Tick if it's a Special Course : <input type="checkbox" value="1" name="spCourse"></td>
                 </tr>
                 <tr>
                 	<td>Credit(s)</td>

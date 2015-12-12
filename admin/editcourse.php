@@ -72,7 +72,7 @@ if( isset($_POST['Submit']) )
 				
 			
 					
-				$str="update courses set courseno='".$_POST["txtcid"]."',coursename='".$_POST["txtcnm"]."',description='".$_POST["tadesc"]."'";
+				$str="update courses set courseno='".$_POST["txtcid"]."',special='".$_POST["spCourse"]."',coursename='".$_POST["txtcnm"]."',description='".$_POST["tadesc"]."'";
 				$str.=",prereqid=".$pid.",coreqid=".$cid.",credits=".$_POST["txtcredits"].",active=$i where cid=".$_GET["id"];
 				ExecuteNonQuery($str);
 			//	echo $str;
@@ -130,6 +130,7 @@ if( isset($_POST['Submit']) )
 								$coreq=$info["coreqid"];
 								$active=$info["active"];
 								$did=$info["deptid"];
+								$special = $info["special"];
 							}?>
 			<table>
               <tr>
@@ -168,7 +169,10 @@ if( isset($_POST['Submit']) )
 					<td>:</td>
                     <td><input type="text" name="txtcredits" maxlength="2" size="2" value="<?php echo $credit; ?>">[Digits only]</td>
                 </tr>
-               
+				<tr>
+                    <td colspan="3">Special Course?? : <input type="checkbox" value="1" name="spCourse" 
+                        <?php if($special == 1) echo "checked"; ?>></td>
+                </tr>
                 <tr>
                 	<td>Course Description<label style="color:red;">*</label></td>
 					<td>:</td>
