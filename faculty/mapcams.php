@@ -142,7 +142,8 @@ redirect_to("welcome.php");
 	<div id="viewsubjects">
     		<?php
 			?>
-			<form method="post" name="form1" action="mapcams.php">			
+			<form method="post" name="form1" action="mapcams.php">
+                            <table><tr><td><a href="modifycoursedetails.php<?php if(isset($_GET["semid"]) && isset($_GET["csid"])) { echo ("?semid=".$_GET["semid"]."&csid=".$_GET["csid"]); } ?>">Go back to modify course details</a></td></tr></table>
             <?php
 				$sql="select courseno from courses where cid=(select cid from course_section where csid=".$_SESSION["mapcsid"].")";
 				$cno=GetSingleField($sql,"courseno");

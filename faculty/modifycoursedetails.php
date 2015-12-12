@@ -160,6 +160,8 @@
         }
         $_SESSION["mapcsid"]=$_POST["ddlcnm"];
         $query_string = array('flag'=>1,
+                              'semid'=>$_SESSION["ddlsem3"],
+                              'csid'=>$_POST["ddlcnm"],
                               'msg'=>'Course details are saved successfully.');
         redirect_to("mapcams.php?".http_build_query($query_string));
     }
