@@ -31,8 +31,7 @@
             $cno = $info["courseno"];
             $cid = $info["cid"];
             $special = $info["special"];
-        }
-        //$cno=GetSingleField("select courseno from course_section cs,courses c where c.cid=cs.cid and csid=".$_POST["ddlcnm"],"courseno");
+        }        
         if(isset($cno))
         {
             $myc=substr($cno,0,1);
@@ -57,7 +56,7 @@
         }
         
         if($special == true){
-            $sql = "update courses set description='".mysqli_real_escape_string($connection,$_POST["tacdetails"])."' where cid=".$cid;
+            $sql = "update courses set description='".mysqli_real_escape_string($connection,$_POST["tacdetails"])."',prereqid=".$_POST["ddlprereq"].",coreqid=".$_POST["ddlcoreq"]." where cid=".$cid;
             ExecuteNonQuery($sql);
         }
         
@@ -175,7 +174,9 @@
         $desc="";
         $credits="";
         $prereq="";
+        $prereqid="";
         $coreq="";
+        $coreqid="";
         $sem="";
         $cno="";
         $classloc="";
@@ -194,6 +195,8 @@
                 $desc=$info["description"];
                 $special = $info["special"];
                 $credits=$info["credits"];
+                $prereqid=$info["prereqid"];
+                $coreqid=$info["coreqid"];
                 if($info["prereqid"]=="0")
                     $prereq="None";
                 else
@@ -621,15 +624,63 @@ $(document).ready(function(e) {
                     </div>
                     </td>
             </tr>
-           	<tr>
-            		<td>Co-requisites</td>
-            		<td>:</td>
-            		<td><input type="text" value="<?php if(isset($coreq) && $coreq!="") echo $coreq; ?>" disabled></td>
+            <tr>
+                <td>Co-requisites</td>
+                <td>:</td>
+                <td>
+                    <?php if($special == false) { ?>
+                    <input type="text" value="<?php if(isset($coreq) && $coreq!="") echo $coreq; ?>" disabled>
+                    <?php }
+                          else { ?>
+                    <select name="ddlcoreq">
+                        <option value="0">Select</option>
+                    <?php
+                    $data=ExecuteNonQuery("select * from co_req");    
+                    $nccnm=""; 	
+                        while($info = mysqli_fetch_assoc($data)) 
+                        {
+                            if(strlen($info["ccname"])>50)
+                            {
+                                $nccnm=substr($info["ccname"],0,50)."..";							
+                            }
+                            else
+                            {
+                                $nccnm=$info["ccname"];							
+                            }
+                        ?>	
+                         <option value="<?php echo $info["coreqid"]; ?>" <?php if($info["coreqid"]==$coreqid) echo " selected";?>><?php echo $nccnm; ?></option>
+                          <?php } }?>
+                    </select>
+                </td>
             </tr>
-           	<tr>
-            		<td>Prerequisites</td>
-            		<td>:</td>
-            		<td><input type="text" value="<?php if(isset($prereq) && $prereq!="") echo $prereq; ?>" disabled></td>
+            <tr>
+                <td>Prerequisites</td>
+                <td>:</td>
+                <td>
+                    <?php if($special == false) { ?>
+                    <input type="text" value="<?php if(isset($prereq) && $prereq!="") echo $prereq; ?>" disabled>
+                    <?php }
+                          else { ?>
+                    <select name="ddlprereq">
+                        <option value="0">Select</option>
+                    <?php
+                    $data=ExecuteNonQuery("select * from pre_req");    
+                    $npcnm=""; 	
+                        while($info = mysqli_fetch_assoc($data)) 
+                        {
+                            if(strlen($info["pcname"])>50)
+                            {
+                                $npcnm=substr($info["pcname"],0,50)."..";							
+                            }
+                            else
+                            {
+                                $npcnm=$info["pcname"];							
+                            }
+                        ?>	
+                         <option value="<?php echo $info["prereqid"]; ?>" <?php if($info["prereqid"]==$prereqid) echo " selected";?> ><?php echo $npcnm; ?></option>   
+                          <?php } }?>
+                    </select>
+                </td>
             </tr>
             <tr>
             <?php
