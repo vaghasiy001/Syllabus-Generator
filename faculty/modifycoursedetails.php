@@ -166,71 +166,73 @@
 
     if(isset($_POST["ddlcnm"]))
     {
-        $cno=GetSingleField("select cid from course_section where csid=".$_POST["ddlcnm"],"cid");
-        $sql="select c.courseno,c.coursename,c.special,c.credits,c.prereqid,c.coreqid,c.description from courses c,course_section cs where c.cid=cs.cid and c.cid=".$cno;
-        $data=ExecuteNonQuery($sql);
-        $cnm="";
-        $special="";
-        $desc="";
-        $credits="";
-        $prereq="";
-        $prereqid="";
-        $coreq="";
-        $coreqid="";
-        $sem="";
-        $cno="";
-        $classloc="";
-        $cday="";
-        $sttimehr="";
-        $sttimemin="";
-        $sttimeampm="";
-        $entimehr="";
-        $entimemin="";
-        $entimeampm="";
-        if(mysqli_num_rows($data)>0)
-        {
-            while($info = mysqli_fetch_assoc($data)) 
+        if($_POST["ddlcnm"]!=0) {
+            $cno=GetSingleField("select cid from course_section where csid=".$_POST["ddlcnm"],"cid");
+            $sql="select c.courseno,c.coursename,c.special,c.credits,c.prereqid,c.coreqid,c.description from courses c,course_section cs where c.cid=cs.cid and c.cid=".$cno;
+            $data=ExecuteNonQuery($sql);
+            $cnm="";
+            $special="";
+            $desc="";
+            $credits="";
+            $prereq="";
+            $prereqid="";
+            $coreq="";
+            $coreqid="";
+            $sem="";
+            $cno="";
+            $classloc="";
+            $cday="";
+            $sttimehr="";
+            $sttimemin="";
+            $sttimeampm="";
+            $entimehr="";
+            $entimemin="";
+            $entimeampm="";
+            if(mysqli_num_rows($data)>0)
             {
-                $cnm=$info["coursename"];
-                $desc=$info["description"];
-                $special = $info["special"];
-                $credits=$info["credits"];
-                $prereqid=$info["prereqid"];
-                $coreqid=$info["coreqid"];
-                if($info["prereqid"]=="0")
-                    $prereq="None";
-                else
-                    $prereq=GetSingleField("select pcname from pre_req where prereqid=".$info["prereqid"],"pcname");
-                if($info["coreqid"]=="0")
-                    $coreq="None";
-                else
-                    $coreq=GetSingleField("select ccname from co_req where coreqid=".$info["coreqid"],"ccname");
-                $cno=$info["courseno"];
-
-                $sql="select starttime,endtime,cday,roomno from facultyhours where csid=".$_POST["ddlcnm"]." and semid=".$_SESSION["ddlsem3"]." and uid=".$_SESSION["userid"];
-                $dt2=ExecuteNonQuery($sql);
-
-                while($inf2 = mysqli_fetch_assoc($dt2)) 
+                while($info = mysqli_fetch_assoc($data)) 
                 {
-                    $classloc=$inf2["roomno"];
-                    $cday=explode(" ",$inf2["cday"]);
-                    $tmp=explode(":",$inf2["starttime"]);
-                    $sttimehr=$tmp[0];
-                    $sttimemin=substr($tmp[1],0,2);
-                    $sttimeampm=substr($tmp[1],-2);
-                    $tmp1=explode(":",$inf2["endtime"]);
-                    $entimehr=$tmp1[0];
-                    $entimemin=substr($tmp1[1],0,2);
-                    $entimeampm=substr($tmp1[1],-2);
+                    $cnm=$info["coursename"];
+                    $desc=$info["description"];
+                    $special = $info["special"];
+                    $credits=$info["credits"];
+                    $prereqid=$info["prereqid"];
+                    $coreqid=$info["coreqid"];
+                    if($info["prereqid"]=="0")
+                        $prereq="None";
+                    else
+                        $prereq=GetSingleField("select pcname from pre_req where prereqid=".$info["prereqid"],"pcname");
+                    if($info["coreqid"]=="0")
+                        $coreq="None";
+                    else
+                        $coreq=GetSingleField("select ccname from co_req where coreqid=".$info["coreqid"],"ccname");
+                    $cno=$info["courseno"];
+
+                    $sql="select starttime,endtime,cday,roomno from facultyhours where csid=".$_POST["ddlcnm"]." and semid=".$_SESSION["ddlsem3"]." and uid=".$_SESSION["userid"];
+                    $dt2=ExecuteNonQuery($sql);
+
+                    while($inf2 = mysqli_fetch_assoc($dt2)) 
+                    {
+                        $classloc=$inf2["roomno"];
+                        $cday=explode(" ",$inf2["cday"]);
+                        $tmp=explode(":",$inf2["starttime"]);
+                        $sttimehr=$tmp[0];
+                        $sttimemin=substr($tmp[1],0,2);
+                        $sttimeampm=substr($tmp[1],-2);
+                        $tmp1=explode(":",$inf2["endtime"]);
+                        $entimehr=$tmp1[0];
+                        $entimemin=substr($tmp1[1],0,2);
+                        $entimeampm=substr($tmp1[1],-2);
+                    }
                 }
-            }
-            if(isset($_SESSION["ddlsem3"]))
-            {
-                $sql="select semname,year from semester where semid=".$_SESSION["ddlsem3"];
-                $data2=ExecuteNonQuery($sql);
-                while($info = mysqli_fetch_assoc($data2)) 
+                if(isset($_SESSION["ddlsem3"]))
                 {
-                    $sem=$info["semname"]." ".$info["year"];
+                    $sql="select semname,year from semester where semid=".$_SESSION["ddlsem3"];
+                    $data2=ExecuteNonQuery($sql);
+                    while($info = mysqli_fetch_assoc($data2)) 
+                    {
+                        $sem=$info["semname"]." ".$info["year"];
+                    }
                 }
             }
         }
@@ -934,7 +936,7 @@ $(document).ready(function(e) {
 	                </td>
             </tr>
            	<tr>
-            <td colspan="3" align="center"><input type="submit" id="btnsubmit" name="btnsubmit" onClick="document.form1.submit();" value="Proceed to Course Assessment Method Mappings"></td>
+            <td colspan="3" align="center"><input type="submit" id="btnsubmit" name="btnsubmit" onClick="document.form1.submit();" value="Proceed to Course Assessment Method Mappings"<?php if($_POST["ddlcnm"]==0) {echo " disabled";} ?>></td>
             </tr>
              </table>
             </form>
