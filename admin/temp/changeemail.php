@@ -18,7 +18,7 @@ if( isset($_POST['Submit']) )
 		{
 		
 				$c_date = date ("Y-m-d");
-				$qry="update users set email='".$_POST["nemail"]."',modifyip='".getip()."',modifydate='".$c_date."' where id=".$_SESSION["userid"];   	 
+				$qry="update users set email='".$_POST["nemail"]."',modifyip='".getip()."',modifydate='".$c_date."' where id=".$_SESSION["a_userid"];   	 
 				$cnt=ExecuteNonQuery($qry);
 				if($cnt==1)
 						redirect_to("changeemail.php?msg=Record updated successfully.&flag=1");
@@ -73,7 +73,7 @@ if( isset($_POST['Submit']) )
             <p>This page will change the admin email.</p>
                 </div>
  					<?php 
-				$data = ExecuteNonQuery('select * FROM users where id='.$_SESSION["userid"]) or die(mysql_error());
+				$data = ExecuteNonQuery('select * FROM users where id='.$_SESSION["a_userid"]) or die(mysql_error());
 							while($info = mysql_fetch_assoc($data)) 
 							{
 						   		$email=$info["email"];	

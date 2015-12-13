@@ -24,11 +24,11 @@
 		{
 				if($npwd==$cpwd)
 				{
-					$cntrec=CountRecords("select * from users where id=".$_SESSION["userid"]." and password='".$opwd."'");
+					$cntrec=CountRecords("select * from users where id=".$_SESSION["a_userid"]." and password='".$opwd."'");
 					echo $cntrec;
 					if($cntrec>0)
 					{
-						$query="update users set password='".$npwd."' where id=".$_SESSION["userid"];
+						$query="update users set password='".$npwd."' where id=".$_SESSION["a_userid"];
 						$ctrec=ExecuteNonQuery($query);
 						if($ctrec==1)
 							{

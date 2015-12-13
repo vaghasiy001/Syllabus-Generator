@@ -29,11 +29,11 @@ ob_start();
 				$activefld=GetSingleField("select active from users where username='".$unm."' and password='".$pwd."'","active");
 				
 				if($activefld=="1")
-				{
-					  $_SESSION["username"]=$unm;
-					  $_SESSION["userid"]=$usrid;
-					  $_SESSION["usrpermission"]=$permission;
-					  redirect_to('welcome.php');
+				{                                    
+                                    $_SESSION["a_username"]=$unm;
+                                    $_SESSION["a_userid"]=$usrid;
+                                    $_SESSION["a_usrpermission"]=$permission;
+                                    redirect_to('welcome.php');
 				}
 				else
 				{

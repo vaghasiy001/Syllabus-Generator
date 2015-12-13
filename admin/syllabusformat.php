@@ -161,7 +161,7 @@
                     The student will be able to<br>";
 					
 					$cntrec=CountRecords("select cno from course_mappings where cno='".str_replace(' ','_',$cno)."' and version='".strtoupper($version)."'");
-					$cnt2=CountRecords('select * from fclo where semid='.$_SESSION['ddlsem4'].' and uid='.$_SESSION['userid'].' and csid='.$_POST['ddlcnm']);
+					$cnt2=CountRecords('select * from fclo where semid='.$_SESSION['ddlsem4'].' and uid='.$_SESSION['a_userid'].' and csid='.$_POST['ddlcnm']);
 					
 					if($cntrec>0)
 					{
@@ -175,7 +175,7 @@
 				    }
 					if($cnt2>0)
 						{
-							$data5=ExecuteNonQuery('select * from fclo where semid='.$_SESSION['ddlsem4'].' and uid='.$_SESSION['userid'].' and csid='.$_POST['ddlcnm']);
+							$data5=ExecuteNonQuery('select * from fclo where semid='.$_SESSION['ddlsem4'].' and uid='.$_SESSION['a_userid'].' and csid='.$_POST['ddlcnm']);
 							 while($info5 = mysqli_fetch_assoc($data5)) 
 							 {
 									$str.=$info5['name'].'<br>';
