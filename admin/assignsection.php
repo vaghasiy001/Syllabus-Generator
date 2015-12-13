@@ -166,7 +166,7 @@ $(document).ready(function(e) {
 					<td  width="10px">:</td>
                     <td>
         <?php 
-			$dept=GetSingleField("select deptid from users where uid=".$_SESSION["userid"],"deptid");
+			$dept=GetSingleField("select deptid from users where uid=".$_SESSION["a_userid"],"deptid");
 			$data = ExecuteNonQuery('select uid,firstname,lastname from users where deptid='.$dept." order by lastname");
 		?>
            <select name="ddlfac" onChange="document.form1.submit();">

@@ -124,7 +124,7 @@ if(isset($_POST["Submit"]))
             </td>
             </tr>
                    <?php 
-					$dept=GetSingleField("select deptid from users where uid=".$_SESSION["userid"],"deptid");
+					$dept=GetSingleField("select deptid from users where uid=".$_SESSION["a_userid"],"deptid");
 					$deptname= GetSingleField("select deptname from dept where deptid=".$dept,"deptname");
 					?>
                 <tr>
