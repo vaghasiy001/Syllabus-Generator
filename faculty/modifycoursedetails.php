@@ -7,7 +7,10 @@
     
     if(isset($_GET["csid"]))
     {
-        $_POST["ddlcnm"]=$_GET["csid"];	
+        $count = CountRecords('select csid from section where semid='.$_SESSION["ddlsem3"]." and uid=".$_SESSION["userid"]." and csid=".$_GET["csid"]." and active=1");
+        if($count > 0) {
+            $_POST["ddlcnm"]=$_GET["csid"];
+        }	
     }
 	
     if (!logged_in()) {
