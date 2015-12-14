@@ -806,8 +806,10 @@ redirect_to("welcome.php");
        
        
        
-           	<tr>
-            <td colspan="3" align="center"><input type="submit" name="btnsubmit" onClick="document.form1.submit();" value="Insert Mappings"></td>
+            <tr>
+                <td colspan="3" align="center">                    
+                    <button type="submit" id="btnsubmit" name="btnsubmit">Insert Mappings</button>
+                </td>
             </tr>
              </table>
             </form>

@@ -940,8 +940,10 @@ $(document).ready(function(e) {
 						</script>
 	                </td>
             </tr>
-           	<tr>
-            <td colspan="3" align="center"><input type="submit" id="btnsubmit" name="btnsubmit" onClick="document.form1.submit();" value="Proceed to Course Assessment Method Mappings"<?php if($_POST["ddlcnm"]==0) {echo " disabled";} ?>></td>
+            <tr>
+                <td colspan="3" align="center">
+                    <button type="submit" id="btnsubmit" name="btnsubmit"<?php if($_POST["ddlcnm"]==0) {echo " disabled";} ?>>Proceed to Course Assessment Method Mappings</button>
+                </td>
             </tr>
              </table>
             </form>
